@@ -1,0 +1,38 @@
+main { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1.25rem 4rem; gap: 1.1rem; }
+.flame { color: var(--text); margin-bottom: -.25rem; }
+h1 { font-weight: 400; font-size: 2.1rem; margin: 0 0 .6rem; letter-spacing: .01em; }
+#search { width: min(36rem, 100%); display: flex; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .25rem .2rem 1.2rem; }
+#search:focus-within { border-color: var(--link); box-shadow: 0 0 0 3px var(--glow); }
+#q { flex: 1; min-width: 0; border: 0; background: none; color: var(--text); font: inherit; font-size: 1.1rem; outline: none; padding: .65rem 0; text-transform: none; }
+#q::placeholder { color: var(--soft); }
+#search button { border: 0; background: var(--link); color: var(--bg); border-radius: 999px; width: 2.6rem; font-size: 1.15rem; }
+#tiles { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, 5.6rem); justify-content: center; gap: 1rem 1.1rem; width: min(40rem, 100%); }
+#tiles a { display: flex; flex-direction: column; align-items: center; gap: .45rem; color: var(--text); font-size: .82rem; text-align: center; }
+#tiles a:hover { text-decoration: none; }
+#tiles .ico { width: 3.6rem; height: 3.6rem; border-radius: 1.1rem; background: var(--card); border: 1px solid var(--line); display: grid; place-items: center; font-size: 1.5rem; color: var(--link); transition: transform .15s ease, border-color .15s; }
+#tiles a:hover .ico { transform: translateY(-3px); border-color: var(--link); }
+#tiles .ico.has-icon { background: color-mix(in srgb, var(--text) 9%, var(--card)); }
+#tiles .ico img { width: 2rem; height: 2rem; object-fit: contain; border-radius: .5rem; }
+#tiles .name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--soft); }
+#tools { display: flex; flex-wrap: wrap; gap: .4rem 1.3rem; justify-content: center; margin-top: 1.4rem; font-size: .95rem; }
+
+/* seasonal bird, sleeping bird, optional cards */
+.flame .zzz { animation: float 2.4s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-3px); } }
+#cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .8rem; width: min(40rem, 100%); margin-top: 1.4rem; }
+#cards[hidden] { display: none; }
+.mini { background: var(--card); border: 1px solid var(--line); border-radius: 1rem; padding: .8rem 1rem; font-size: .92rem; }
+.mini h3 { margin: 0 0 .3rem; font-weight: 400; color: var(--soft); font-size: .8rem; }
+.mini p, .mini ul { margin: 0; padding: 0; list-style: none; }
+.mini li { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini a { color: var(--text); }
+#gear { position: fixed; right: 1rem; bottom: .8rem; font-size: .82rem; color: var(--soft); opacity: .6; }
+#gear:hover { opacity: 1; }
+
+/* the hidden attribute does not hide parts of an svg by itself */
+svg [hidden] { display: none; }
+
+#search button { display: grid; place-items: center; padding: 0; width: 2.7rem; height: 2.7rem; align-self: center; }
+#search button svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s ease; }
+#search button:hover svg { transform: translateX(2px); }
+#tiles[hidden] { display: none; }

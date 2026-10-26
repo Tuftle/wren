@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>extension shelf</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .item { display: flex; gap: 1rem; align-items: center; padding: .8rem 0; border-top: 1px solid var(--line); }
+    .item:first-child { border-top: 0; }
+    .item .t { flex: 1; } .item b { font-weight: 400; display: block; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>extension shelf</h1>
+    <p class="lede">wren runs real Firefox extensions. these are a few well-loved ones, from addons.mozilla.org, installed only when you press the button. wren does not choose for you.</p>
+    <section class="card" id="list"></section>
+    <p class="soft" id="note"></p>
+    <p class="soft">anything else: open <b>about:addons</b> from the menu, or the wren advanced page.</p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="extensions.js"></script>
+</body>
+</html>

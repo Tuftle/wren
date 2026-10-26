@@ -1,0 +1,43 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+sidebar-panel-header {
+  padding-inline: var(--space-large);
+
+  @media not -moz-pref("sidebar.revamp") {
+    display: none;
+  }
+}
+
+/* Wren: the sidebar header in the theme's cream and brown (light) or dark brown and amber (dark) */
+:root {
+  --wren-sidebar-bg: #efe8da;
+  --wren-sidebar-text: #3b2f25;
+  --color-accent-primary: #8a4b2a;
+  --color-accent-primary-hover: #a15a34;
+  --color-accent-primary-active: #6f3b20;
+  --button-text-color-primary: #f4efe6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wren-sidebar-bg: #1d1813;
+    --wren-sidebar-text: #e6dccd;
+    --color-accent-primary: #d9a073;
+    --color-accent-primary-hover: #e6b58a;
+    --color-accent-primary-active: #c68b5e;
+    --button-text-color-primary: #211c17;
+  }
+}
+
+html,
+body,
+sidebar-panel-header {
+  background-color: var(--wren-sidebar-bg) !important;
+  color: var(--wren-sidebar-text) !important;
+}
+
+sidebar-panel-header {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+}

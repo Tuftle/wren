@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>under the hood</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .8rem; } .grid button { text-align: left; background: var(--bg); border: 1px solid var(--line); border-radius: .9rem; padding: .7rem .9rem; } .grid button:hover { border-color: var(--link); } .grid b { font-weight: 400; display: block; } .grid span { color: var(--soft); font-size: .85rem; }</style>
+</head>
+<body>
+  <main class="app">
+    <h1>under the hood</h1>
+    <p class="lede">wren is Firefox underneath, with all of its engine and tools. this is the door to them. nothing here is needed to use wren.</p>
+    <section class="card">
+      <h2>diagnostics</h2>
+      <div class="grid" id="grid"></div>
+    </section>
+    <section class="card">
+      <h2>developer tools</h2>
+      <p>open them on any page with <b>F12</b> or <b>Ctrl+Shift+I</b>. view a page's source with <b>Ctrl+U</b>.</p>
+      <p class="soft">screenshots: <b>Ctrl+Shift+S</b>. reader view: <b>Ctrl+Alt+R</b>. the browser console: <b>Ctrl+Shift+J</b>.</p>
+    </section>
+    <p class="soft" id="note"></p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="advanced.js"></script>
+</body>
+</html>

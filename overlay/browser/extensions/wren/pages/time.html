@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>time report</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app">
+    <h1>where your time went</h1>
+    <p class="lede">counted only while wren is in front, kept only in this browser, and only if you turn it on in settings.</p>
+    <section class="card" id="off" hidden>
+      <p>the time report is off.</p>
+      <button class="btn" id="on">turn it on</button>
+    </section>
+    <section class="card"><h2>today <span class="soft" id="todayTotal"></span></h2><div class="bars" id="today"></div></section>
+    <section class="card"><h2>this week <span class="soft" id="weekTotal"></span></h2><div class="bars" id="week"></div></section>
+    <button class="btn quiet small" id="clear">forget the report</button>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="time.js"></script>
+</body>
+</html>

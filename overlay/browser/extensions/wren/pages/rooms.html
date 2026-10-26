@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>rooms</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .room { display: flex; align-items: center; gap: .8rem; padding: .6rem 0; border-top: 1px solid var(--line); }
+    .room:first-child { border-top: 0; }
+    .dot { width: 1rem; height: 1rem; border-radius: 50%; background: var(--c); flex: none; }
+    .room b { font-weight: 400; flex: 1; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>rooms</h1>
+    <p class="lede">a room keeps its own cookies and logins, apart from every other room. so work, shopping and banking never see each other. the tabs show the room's colour.</p>
+    <section class="card"><h2>your rooms</h2><div id="list"></div><p class="soft" id="empty" hidden>no rooms yet. pick one below.</p></section>
+    <section class="card">
+      <h2>add a room</h2>
+      <div class="row" id="presets"></div>
+      <form class="row" id="form" style="margin-top:.8rem">
+        <input class="grow" id="name" type="text" placeholder="or name your own">
+        <select id="color"></select>
+        <button class="btn small">add</button>
+      </form>
+    </section>
+    <p class="soft" id="note"></p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="rooms.js"></script>
+</body>
+</html>

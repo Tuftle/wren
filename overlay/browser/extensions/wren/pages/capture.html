@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>quick capture</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app narrow">
+    <h2>quick capture</h2>
+    <p class="soft">paste a link to save it to your inbox board, or jot a thought for your scratchpad.</p>
+    <textarea id="text" rows="4" placeholder="a link or a note" autofocus></textarea>
+    <div class="row" style="margin-top:.8rem;justify-content:space-between">
+      <span class="soft" id="state">press Ctrl+Enter to save</span>
+      <button class="btn small" id="save">save</button>
+    </div>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="capture.js"></script>
+</body>
+</html>

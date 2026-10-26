@@ -1,0 +1,54 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* The small things that make Firefox's own pages (Settings, Passwords, Add-ons, About pages) feel like
+ * Wren: a warm glow at the top, quieter headings, softer links and a little bird in the corner. */
+
+html {
+  background-color: var(--background-color-canvas);
+}
+
+body {
+  background-image: radial-gradient(60rem 34rem at 50% -8%, light-dark(rgba(224, 168, 112, 0.24), rgba(217, 160, 115, 0.11)), transparent 70%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* a page with a solid sticky header (Add-ons) would show the glow's edge as a box, so it goes without */
+body:has(#page-header) {
+  background-image: none;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+a {
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+::selection {
+  background: light-dark(#ecd2b3, #5a3d26);
+  color: inherit;
+}
+
+* {
+  scrollbar-color: light-dark(#cdb99d, #5a4b3d) transparent;
+}
+
+/* the little bird, resting in the bottom corner */
+body::after {
+  content: "";
+  position: fixed;
+  inset-block-end: 14px;
+  inset-inline-end: 18px;
+  width: 28px;
+  height: 28px;
+  background: url("chrome://branding/content/about-logo.svg") center / contain no-repeat;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}

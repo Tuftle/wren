@@ -1,0 +1,169 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* Wren's own touches on the browser window: flat, quiet and round. Kept in this one file so that
+ * Firefox's own style files stay untouched and updates merge cleanly. */
+
+/* no hard lines between the bars and the page */
+#nav-bar,
+#TabsToolbar,
+#vertical-tabs,
+toolbar {
+  box-shadow: none !important;
+}
+
+#nav-bar {
+  border-top: none !important;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 8%, transparent) !important;
+}
+
+/* the address bar: one soft pill, no outline until it is in use */
+#urlbar-background {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 999px !important;
+}
+
+#urlbar[focused] > #urlbar-background,
+#urlbar[open] > #urlbar-background {
+  border-color: color-mix(in srgb, var(--focus-outline-color, currentColor) 70%, transparent) !important;
+}
+
+/* small things nobody needs until they need them */
+#urlbar-go-button,
+#pageActionButton,
+#urlbar-zoom-button,
+#tracking-protection-icon-container:not([hasException]):not([active]) {
+  display: none !important;
+}
+
+/* focus mode: only the page (wren's focus command sets the attribute, and takes it off again) */
+:root[wren-focus] #nav-bar,
+:root[wren-focus] #TabsToolbar,
+:root[wren-focus] #vertical-tabs,
+:root[wren-focus] #sidebar-main,
+:root[wren-focus] #PersonalToolbar,
+:root[wren-focus] #titlebar {
+  visibility: collapse !important;
+}
+
+/* nook's voice: serif type in the window, and a sidebar header in the theme's own colours */
+:root {
+  --wren-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+}
+
+#navigator-toolbox,
+#nav-bar,
+#TabsToolbar,
+#sidebar-main,
+#sidebar-box,
+#urlbar,
+#urlbar-input,
+.urlbarView,
+.tabbrowser-tab,
+.tab-label,
+#vertical-tabs,
+menupopup,
+panel,
+.panel-subview-body,
+.subviewbutton,
+.toolbarbutton-text {
+  font-family: var(--wren-serif) !important;
+}
+
+#sidebar-header,
+#sidebar-switcher-target,
+#sidebar-box > #sidebar-header {
+  background-color: var(--sidebar-background-color, var(--toolbar-bgcolor)) !important;
+  color: var(--sidebar-text-color, inherit) !important;
+}
+
+/* the accent colour: brown in the light theme, amber in the dark one (not Firefox's purple) */
+:root {
+  --color-accent-primary: #8a4b2a;
+  --color-accent-primary-hover: #a15a34;
+  --color-accent-primary-active: #6f3b20;
+  --button-text-color-primary: #f4efe6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-accent-primary: #d9a073;
+    --color-accent-primary-hover: #e6b58a;
+    --color-accent-primary-active: #c68b5e;
+    --button-text-color-primary: #211c17;
+  }
+}
+
+/* --- the address bar: a soft, centred pill that opens up when you use it ------------------------ */
+#urlbar-background {
+  background-color: color-mix(in srgb, var(--toolbar-field-background-color, currentColor) 92%, transparent) !important;
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent) !important;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .25s ease;
+}
+
+#urlbar:not([focused]):hover > #urlbar-background {
+  border-color: color-mix(in srgb, currentColor 22%, transparent) !important;
+}
+
+/* resting: the address (or the invitation to search) sits in the middle */
+#urlbar:not([focused]) #urlbar-input {
+  text-align: center;
+}
+
+#urlbar:not([focused]) #urlbar-input::placeholder {
+  opacity: .7;
+}
+
+/* in use: a warm ring, the way nook's own search box glows */
+#urlbar[focused] > #urlbar-background,
+#urlbar[open] > #urlbar-background {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-primary, #8a4b2a) 28%, transparent), 0 6px 24px rgba(40, 25, 10, .18) !important;
+  border-color: var(--color-accent-primary, #8a4b2a) !important;
+}
+
+#urlbar-input {
+  font-size: 1.04em;
+}
+
+/* the suggestions: a rounded card with room to breathe */
+.urlbarView {
+  margin-top: 6px !important;
+}
+
+.urlbarView-body-outer {
+  border-radius: 1.3rem !important;
+}
+
+.urlbarView-row {
+  border-radius: .85rem !important;
+  margin-inline: .35rem !important;
+}
+
+.urlbarView-row[selected] {
+  background-color: color-mix(in srgb, var(--color-accent-primary, #8a4b2a) 20%, transparent) !important;
+}
+
+.urlbarView-title {
+  font-weight: 400;
+}
+
+/* --- the feel of the window: the site's colour, the light of the day, and the mood, as soft tints ---
+ * Wren's add-on sets --wren-site, --wren-time and --wren-mood on the window; with none set, nothing shows. */
+#navigator-toolbox,
+#sidebar-main {
+  position: relative;
+}
+
+#navigator-toolbox::after,
+#sidebar-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--wren-site, transparent), var(--wren-site, transparent)),
+    linear-gradient(var(--wren-time, transparent), var(--wren-time, transparent)),
+    linear-gradient(var(--wren-mood, transparent), var(--wren-mood, transparent));
+}

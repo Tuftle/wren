@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>comfort</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app">
+    <h1>comfort</h1>
+    <p class="lede">make pages easier on your eyes and your attention. changes apply to the pages you open, straight away.</p>
+
+    <section class="card">
+      <h2>reading</h2>
+      <p class="soft">typeface for page text</p>
+      <select id="font">
+        <option value="">the page's own</option>
+        <option value="Verdana, Geneva, sans-serif">verdana (clear and wide)</option>
+        <option value="'Trebuchet MS', Tahoma, sans-serif">trebuchet</option>
+        <option value="'Comic Sans MS', 'Chalkboard SE', cursive">comic sans (many find it easier)</option>
+        <option value="Georgia, 'Iowan Old Style', serif">georgia</option>
+        <option value="Arial, Helvetica, sans-serif">arial</option>
+      </select>
+      <p class="soft">text size <b id="sizeV"></b></p>
+      <input id="size" type="range" min="90" max="220" step="10" style="width:100%">
+      <p class="soft">space between letters <b id="spaceV"></b></p>
+      <input id="spacing" type="range" min="0" max="16" step="2" style="width:100%">
+    </section>
+
+    <section class="card">
+      <h2>calm and contrast</h2>
+      <label class="switch"><input type="checkbox" id="calm"><div><b>calm motion</b><span>stops animations, on pages that respect it, and in wren itself.</span></div></label>
+      <label class="switch"><input type="checkbox" id="contrast"><div><b>stronger contrast</b><span>makes text and edges stand out more.</span></div></label>
+    </section>
+
+    <section class="card">
+      <h2>try it</h2>
+      <p>the quick brown fox jumps over the lazy dog. reading should feel easy, whatever your eyes or your attention do on a given day.</p>
+    </section>
+    <p class="soft" id="saved">&nbsp;</p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="access.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>bookshelf</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .shelf { margin: 0 0 2.2rem; }
+    .shelf h2 { margin: 0 0 .5rem; }
+    .row { display: flex; align-items: flex-end; gap: 3px; flex-wrap: wrap; padding: 0 .8rem; border-bottom: 10px solid #6f4a2c; border-radius: 0 0 4px 4px; background: linear-gradient(var(--card), transparent 60%); min-height: 4rem; }
+    .spine { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); display: flex; align-items: center; justify-content: flex-start; padding: .7rem .35rem; border-radius: 3px; font-size: .82rem; color: #fbf6ec; text-decoration: none; background: var(--c); border: 1px solid rgba(0, 0, 0, .18); box-shadow: inset 2px 0 0 rgba(255, 255, 255, .18); overflow: hidden; white-space: nowrap; transition: margin .15s; text-transform: none; }
+    .spine:hover { margin-bottom: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main class="app" style="max-width:62rem">
+    <h1>bookshelf</h1>
+    <p class="lede">your bookmarks as books. each folder is a shelf. click a spine to open it.</p>
+    <div id="shelves"></div>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="shelf.js"></script>
+</body>
+</html>

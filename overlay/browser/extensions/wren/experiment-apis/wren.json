@@ -1,0 +1,309 @@
+[
+  {
+    "namespace": "wren",
+    "description": "The few browser things Wren's own pages need to reach.",
+    "events": [
+      {
+        "name": "onImportDone",
+        "type": "function",
+        "description": "Fired when importing from another browser has finished.",
+        "parameters": []
+      }
+    ],
+    "functions": [
+      {
+        "name": "getState",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "makeDefaultBrowser",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "openImport",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "setPrivacy",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "level",
+            "type": "string",
+            "enum": [
+              "standard",
+              "strict"
+            ]
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "getPrivacyStats",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "days",
+            "type": "integer"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "listPermissions",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "revokePermission",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "origin",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "type": "string"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "revokeAllPermissions",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "setQuietMode",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "on",
+            "type": "boolean"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "getQuietMode",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "analyzePasswords",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "panic",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "setFocus",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "on",
+            "type": "boolean"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "getProcesses",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "scanFile",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "path",
+            "type": "string"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "adoptProfile",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "listFirefoxProfiles",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "listFirefoxExtensions",
+        "type": "function",
+        "parameters": [{ "name": "path", "type": "string" }],
+        "async": true
+      },
+      {
+        "name": "importFromFirefox",
+        "type": "function",
+        "parameters": [
+          { "name": "path", "type": "string" },
+          { "name": "what", "type": "object", "additionalProperties": { "type": "any" } }
+        ],
+        "async": true
+      },
+      {
+        "name": "setMods",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "mods",
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": { "type": "any" } }
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "setChromeVars",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "vars",
+            "type": "object",
+            "additionalProperties": {
+              "type": "any"
+            }
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "enableAnswers",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "openAbout",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "page",
+            "type": "string"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "installExtension",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string"
+          },
+          {
+            "name": "options",
+            "type": "object",
+            "optional": true,
+            "additionalProperties": { "type": "any" }
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "listExtensions",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "getBackList",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "gotoHistory",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "integer"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "openTranslations",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "setCalmMotion",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "on",
+            "type": "boolean"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "listEngines",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "setDefaultEngine",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string"
+          }
+        ],
+        "async": true
+      },
+      {
+        "name": "updateInfo",
+        "type": "function",
+        "parameters": [],
+        "async": true
+      },
+      {
+        "name": "installUpdate",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string"
+          },
+          {
+            "name": "sha256",
+            "type": "string"
+          }
+        ],
+        "async": true
+      }
+    ]
+  }
+]

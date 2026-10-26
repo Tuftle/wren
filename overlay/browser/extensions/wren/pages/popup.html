@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren tools</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="pop">
+    <input id="find" type="search" placeholder="jump to a tab or recently closed" autofocus>
+    <ul id="results" class="list"></ul>
+
+    <p class="soft" id="reading"></p>
+
+    <div class="grid">
+      <button class="tile" id="focus"><b>focus</b><span id="focusNote">hide the bars</span></button>
+      <button class="tile" id="rain"><b>rain</b><span>cozy sound</span></button>
+      <button class="tile" id="fire"><b>fireplace</b><span>cozy sound</span></button>
+      <button class="tile" id="cafe"><b>cafe</b><span>cozy sound</span></button>
+      <a class="tile" href="pages.html" data-open><b>wren pages</b><span>notes, sheet, draw</span></a>
+      <a class="tile" href="privacy.html" data-open><b>privacy</b><span>report and tools</span></a>
+      <a class="tile" href="slow.html" data-open><b>why is it slow?</b><span>what uses memory</span></a>
+      <a class="tile" href="digest.html" data-open><b>daily digest</b><span>from nook</span></a>
+    </div>
+
+    <details class="more"><summary>this page</summary>
+      <div class="chips">
+        <button data-act="listen">listen</button>
+        <button data-act="copylink">copy link</button>
+        <button data-act="cite">copy citation</button>
+        <button data-act="save">save a copy</button>
+        <button data-act="pdf">clean pdf</button>
+        <button data-act="watch">watch it</button>
+        <button data-act="remind1">remind me in 1h</button>
+        <button data-act="remind24">remind me tomorrow</button>
+      </div>
+    </details>
+    <details class="more"><summary>this site</summary>
+      <p class="soft" id="siteName"></p>
+      <div class="chips">
+        <button data-act="dark" id="darkBtn">dark mode</button>
+        <button data-act="noscripts" id="scriptsBtn">block scripts</button>
+        <button data-act="zoomin">zoom +</button>
+        <button data-act="zoomout">zoom &minus;</button>
+        <button data-act="weird">looks weird?</button>
+      </div>
+    </details>
+    <details class="more"><summary>tabs and sound</summary>
+      <div class="chips">
+        <button data-act="group">group by site</button>
+        <button data-act="sleep">sleep idle tabs</button>
+        <button data-act="mute">mute all</button>
+        <button data-act="unmute">unmute all</button>
+        <button data-act="guest">guest window</button>
+        <button data-act="palette">palette</button>
+      </div>
+      <p class="soft" id="wsRow"></p>
+    </details>
+    <details class="more"><summary>more places</summary>
+      <div class="chips">
+        <a class="chip" href="trail.html" data-open>trail</a>
+        <a class="chip" href="table.html" data-open>table</a>
+        <a class="chip" href="shelf.html" data-open>bookshelf</a>
+        <a class="chip" href="rooms.html" data-open>rooms</a>
+        <a class="chip" href="review.html" data-open>your year</a>
+        <a class="chip" href="extensions.html" data-open>extension shelf</a>
+        <a class="chip" href="mods.html" data-open>mods</a>
+        <a class="chip" href="update.html" data-open>updates</a>
+        <a class="chip" href="access.html" data-open>comfort</a>
+        <a class="chip" href="advanced.html" data-open>under the hood</a>
+        <button data-act="postcard">postcard</button>
+        <button data-act="translate">translate</button>
+      </div>
+    </details>
+    <p class="soft" id="weatherNote"></p>
+    <p class="soft" id="note"></p>
+
+    <div class="foot">
+      <a href="settings.html" data-open>settings</a>
+      <a href="tools.html" data-open>tools</a>
+      <a href="shortcuts.html" data-open>shortcuts</a>
+      <button id="panic" class="panic">panic</button>
+    </div>
+  </div>
+  <script src="../lib/common.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

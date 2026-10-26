@@ -1,0 +1,21 @@
+.app.wide { max-width: 70rem; }
+.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.head .tabs { margin: 0; border: 0; }
+.pane { display: none; }
+.pane.on { display: block; }
+.notes { display: grid; grid-template-columns: 14rem 1fr; gap: 1.2rem; }
+.notes aside .list { margin-top: .6rem; max-height: 30rem; overflow: auto; }
+.notes aside li { cursor: pointer; }
+.notes aside li.on a { color: var(--link); }
+.editor { display: grid; gap: .6rem; align-content: start; }
+#noteTitle { font-size: 1.25rem; width: 100%; }
+.btn.alt { cursor: pointer; display: inline-block; }
+.gridwrap { overflow: auto; max-height: 34rem; margin-top: .8rem; border: 1px solid var(--line); border-radius: .8rem; background: var(--card); }
+#grid { border-collapse: collapse; font-size: .92rem; }
+#grid th { position: sticky; top: 0; background: var(--bg); color: var(--soft); font-weight: 400; padding: .25rem .5rem; border: 1px solid var(--line); min-width: 5.5rem; }
+#grid th.row { left: 0; min-width: 2.2rem; z-index: 1; }
+#grid td { border: 1px solid var(--line); padding: 0; }
+#grid td input { width: 100%; border: 0; background: transparent; color: var(--text); font: inherit; padding: .3rem .5rem; min-width: 5.5rem; border-radius: 0; }
+#grid td input:focus { outline: 2px solid var(--link); outline-offset: -2px; background: color-mix(in srgb, var(--link) 8%, transparent); }
+canvas { width: 100%; max-width: 1100px; background: #fffdf8; border: 1px solid var(--line); border-radius: .9rem; margin-top: .8rem; touch-action: none; cursor: crosshair; }
+@media (max-width: 720px) { .notes { grid-template-columns: 1fr; } }

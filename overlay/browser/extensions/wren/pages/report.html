@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>this site looks weird</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app narrow">
+    <h2>this site looks weird</h2>
+    <p class="soft" id="what">checking the page you were on…</p>
+    <p class="soft">this is the one thing in wren that leaves your device, and only when you press send. it sends the site name and the date and time, nothing else: no address path, no page content, no account, no history. your connection reaches tuftle's server like it would any website's, so the server can see your ip address for that moment. tuftle does not save it, though its web host may keep ordinary server logs.</p>
+    <p class="soft">the report gets a random code. when the problem has been looked at, wren finds out by asking tuftle about that code only, and tells you the next time it is open.</p>
+    <div class="row" style="margin-top:.8rem;justify-content:space-between">
+      <span class="soft" id="state"></span>
+      <span>
+        <button class="btn small" id="cancel">cancel</button>
+        <button class="btn small" id="send" disabled style="opacity:.5">send</button>
+      </span>
+    </div>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>

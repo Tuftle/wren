@@ -1,0 +1,29 @@
+html, body { height: auto; width: 21rem; }
+body { font-size: 15px; background: var(--bg); }
+.pop { padding: .8rem; display: flex; flex-direction: column; gap: .5rem; }
+#find { width: 100%; }
+#results { max-height: 11rem; overflow: auto; }
+#results li { padding: .35rem 0; cursor: pointer; }
+#results li:hover { color: var(--link); }
+#results .title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#results .tag { color: var(--soft); font-size: .78rem; }
+#reading { margin: .1rem 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }
+.tile { display: flex; flex-direction: column; gap: .05rem; text-align: left; text-decoration: none; color: var(--text);
+  background: var(--card); border: 1px solid var(--line); border-radius: .9rem; padding: .55rem .7rem; }
+.tile:hover { border-color: var(--link); text-decoration: none; }
+.tile b { font-weight: 400; }
+.tile span { color: var(--soft); font-size: .8rem; }
+.tile.on { border-color: var(--link); background: color-mix(in srgb, var(--link) 10%, var(--card)); }
+.foot { display: flex; justify-content: space-between; align-items: center; font-size: .88rem; padding-top: .2rem; }
+.panic { background: none; border: 1px solid var(--line); color: var(--soft); border-radius: 999px; padding: .15em .8em; font-size: .85rem; }
+.panic:hover { color: #fff; background: #a43f2c; border-color: #a43f2c; }
+
+.more { border-top: 1px solid var(--line); padding-top: .35rem; }
+.more summary { cursor: pointer; color: var(--soft); font-size: .9rem; padding: .15rem 0; }
+.chips { display: flex; flex-wrap: wrap; gap: .35rem; padding: .35rem 0; }
+.chips button { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: .2em .8em; font-size: .85rem; }
+.chips button:hover { border-color: var(--link); }
+.chip { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: .2em .8em; font-size: .85rem; color: var(--text); }
+.chip:hover { border-color: var(--link); text-decoration: none; }
+.chips button.on { background: color-mix(in srgb, var(--link) 14%, var(--card)); border-color: var(--link); }

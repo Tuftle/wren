@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren privacy</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app">
+    <h1>privacy</h1>
+    <p class="lede">what wren kept out this week, and the tools to keep it that way. all of this is worked out on this computer.</p>
+
+    <section class="card">
+      <h2>kept out this week <span class="soft" id="statsNote"></span></h2>
+      <p class="big" id="total">&hellip;</p>
+      <div class="bars" id="bars"></div>
+    </section>
+
+    <section class="card">
+      <h2>quiet mode</h2>
+      <label class="switch"><input type="checkbox" id="quiet"><div><b>no questions from websites</b><span>camera, microphone, location and notification requests are turned down without asking.</span></div></label>
+    </section>
+
+    <section class="card">
+      <h2>who has permission <button class="btn small danger" id="revokeAll">revoke all</button></h2>
+      <ul class="list" id="perms"></ul>
+      <p class="soft" id="permsEmpty" hidden>no site has been given special access.</p>
+    </section>
+
+    <section class="card">
+      <h2>password check <button class="btn small" id="checkPw">check</button></h2>
+      <p class="soft">looks at your saved passwords for ones reused on several sites and ones that are short or very common. nothing is sent anywhere, and the passwords are never shown.</p>
+      <div id="pwOut"></div>
+    </section>
+
+    <section class="card">
+      <h2>recent downloads</h2>
+      <ul class="list" id="downloads"></ul>
+      <p class="soft">&ldquo;scan&rdquo; asks Windows Security to look at a file.</p>
+    </section>
+
+    <section class="card">
+      <h2>panic</h2>
+      <p>forgets history, cookies, cache and open tabs, and closes wren. also on <b>Alt+Shift+P</b>.</p>
+      <button class="btn danger" id="panic">forget everything and close</button>
+    </section>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="privacy.js"></script>
+</body>
+</html>

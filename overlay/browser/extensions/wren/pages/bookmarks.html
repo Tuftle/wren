@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>bookmark health</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app">
+    <h1>bookmark health</h1>
+    <p class="lede">looks for bookmarks that no longer open, and for the same page saved twice. the checking is done by this browser, one site at a time.</p>
+    <div class="row"><button class="btn" id="start">check my bookmarks</button><span class="soft" id="progress"></span></div>
+    <section class="card" id="deadBox" hidden><h2>no longer open <button class="btn small danger" id="removeDead">remove all</button></h2><ul class="list" id="dead"></ul></section>
+    <section class="card" id="dupBox" hidden><h2>saved more than once <button class="btn small danger" id="removeDup">remove the extras</button></h2><ul class="list" id="dups"></ul></section>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="bookmarks.js"></script>
+</body>
+</html>

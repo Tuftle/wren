@@ -1,0 +1,131 @@
+{
+  "manifest_version": 2,
+  "name": "Wren",
+  "description": "Wren's start page, welcome, sidebar and everyday tools.",
+  "version": "1.2.0",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "wren@wren.local"
+    }
+  },
+
+  "permissions": [
+    "storage", "unlimitedStorage", "topSites", "search", "tabs", "tabHide", "tabGroups", "bookmarks",
+    "browsingData", "history", "downloads", "alarms", "contextMenus", "notifications", "sessions",
+    "webRequest", "webRequestBlocking", "webNavigation", "clipboardWrite", "contextualIdentities", "cookies", "<all_urls>"
+  ],
+
+  "chrome_url_overrides": {
+    "newtab": "pages/start.html"
+  },
+
+  "browser_action": {
+    "default_title": "wren tools",
+    "default_popup": "pages/popup.html",
+    "default_icon": "pages/bird.svg",
+    "default_area": "navbar"
+  },
+
+  "page_action": {
+    "default_title": "this site looks weird",
+    "default_icon": "pages/weird.svg",
+    "show_matches": ["http://*/*", "https://*/*"],
+    "pinned": true
+  },
+
+  "sidebar_action": {
+    "default_title": "wren",
+    "default_panel": "pages/sidebar.html",
+    "default_icon": "pages/bird.svg",
+    "open_at_install": false
+  },
+
+  "omnibox": {
+    "keyword": "@"
+  },
+
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": { "default": "Ctrl+Shift+K" },
+      "description": "Open wren tools and search your tabs"
+    },
+    "_execute_sidebar_action": {
+      "suggested_key": { "default": "Alt+Shift+W" },
+      "description": "Open or close the wren sidebar"
+    },
+    "palette": {
+      "suggested_key": { "default": "Alt+Shift+K" },
+      "description": "Command palette: run any wren action"
+    },
+    "capture": {
+      "suggested_key": { "default": "Alt+Shift+C" },
+      "description": "Quick capture: jot a note or save a link"
+    },
+    "focus-mode": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Focus mode: hide the bars and quiet notifications"
+    },
+    "panic": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Panic: forget everything and close wren"
+    },
+    "shortcuts": {
+      "suggested_key": { "default": "Alt+Shift+H" },
+      "description": "Show the shortcut cheat sheet"
+    }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["lib/common.js", "content/page.js", "content/extras.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": ["https://tuftle.vercel.app/*", "https://*.tuftle.vercel.app/*", "http://localhost/*", "http://127.0.0.1/*"],
+      "js": ["content/bridge.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content/early.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+
+  "web_accessible_resources": ["pages/bird.svg", "pages/blocked.html"],
+
+  "experiment_apis": {
+    "wren": {
+      "schema": "experiment-apis/wren.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "script": "experiment-apis/wren.js",
+        "paths": [["wren"]]
+      }
+    }
+  },
+
+  "background": {
+    "scripts": [
+      "lib/common.js",
+      "background/sounds.js",
+      "background/background.js",
+      "background/tabs.js",
+      "background/web.js",
+      "background/library.js",
+      "background/feel.js",
+      "background/extras.js",
+      "background/builtin-mods.js",
+      "background/mods.js",
+      "background/profile.js",
+      "background/importer.js",
+      "background/reports.js",
+      "background/updates.js",
+      "background/startup.js"
+    ]
+  }
+}

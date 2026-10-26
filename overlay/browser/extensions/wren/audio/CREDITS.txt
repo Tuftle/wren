@@ -1,0 +1,3 @@
+fire.ogg: "fire.wav" by PagDev, from https://opengameart.org/content/fireplace-sound-loop
+Licence: CC0 1.0 (public domain dedication), https://creativecommons.org/publicdomain/zero/1.0/
+Changed: converted to Ogg Vorbis and loudness-matched. Credit is not required; it is given gladly.

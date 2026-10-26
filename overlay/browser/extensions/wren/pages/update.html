@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>updates</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app narrow">
+    <h2>updates</h2>
+    <p id="status" class="soft">checking…</p>
+    <p id="notes" class="soft" hidden></p>
+    <div class="row" style="margin-top:.8rem;gap:.6rem">
+      <button class="btn small" id="again">check again</button>
+      <button class="btn small" id="go" hidden>update and restart</button>
+    </div>
+    <p class="soft" style="margin-top:1.4rem">wren looks for a newer build a couple of times a day by downloading a small file from tuftle. nothing about you is in that request. an update is downloaded, checked against the fingerprint that was announced with it, and swapped in; your bookmarks, history and settings stay as they are.</p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="update.js"></script>
+</body>
+</html>

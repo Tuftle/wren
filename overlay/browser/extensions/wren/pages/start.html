@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wren</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="start.css">
+  <link rel="stylesheet" href="welcome.css">
+  <link rel="stylesheet" href="start2.css">
+</head>
+<body>
+  <main id="page">
+    <svg class="flame" viewBox="0 0 128 128" aria-hidden="true">
+      <path d="M24 99h82" stroke="currentColor" stroke-opacity=".25" stroke-width="4" stroke-linecap="round"/>
+      <g class="glow">
+        <ellipse cx="62" cy="74" rx="28" ry="21" fill="#8a4b2a"/>
+        <circle cx="42" cy="57" r="14" fill="#8a4b2a"/>
+        <path d="M84 72C97 68 102 50 99 32c-1-4-7-3-7 1 0 14-6 22-17 27z" fill="#8a4b2a"/>
+        <path d="M30 54L16 52l13 8z" fill="#8a4b2a"/>
+        <path d="M54 92v7M68 92v7" stroke="#8a4b2a" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M52 70c8-6 22-5 30 4-8 10-26 10-34 1 1-2 2-3 4-5z" fill="#e0a870"/>
+        <circle class="eye" cx="38" cy="54" r="2.6" fill="#f4efe6"/>
+        <path class="eye-shut" d="M34.5 54.5q3.5 3 7 0" stroke="#f4efe6" stroke-width="1.9" fill="none" stroke-linecap="round" hidden/>
+        <g class="season winter" hidden>
+          <path d="M31 66q14 12 30 5" fill="none" stroke="#c4553a" stroke-width="8" stroke-linecap="round"/>
+          <path d="M37 71l-3 15" fill="none" stroke="#c4553a" stroke-width="7" stroke-linecap="round"/>
+        </g>
+        <g class="season spring" hidden>
+          <g fill="#e8a0a8"><circle cx="30" cy="38" r="5"/><circle cx="42" cy="31" r="5"/><circle cx="54" cy="36" r="5"/></g>
+          <g fill="#e0a870"><circle cx="30" cy="38" r="1.8"/><circle cx="42" cy="31" r="1.8"/><circle cx="54" cy="36" r="1.8"/></g>
+        </g>
+        <g class="season summer" hidden>
+          <circle cx="108" cy="34" r="8" fill="#e0a870"/>
+          <path d="M108 20v-4M108 52v-4M94 34h-4M126 34h-4M98 24l-3-3M118 44l3 3M118 24l3-3M98 44l-3 3" stroke="#e0a870" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g class="season autumn" hidden>
+          <path d="M22 30c8-6 16-2 18 6-8 4-16 2-18-6z" fill="#c4553a"/>
+          <path d="M104 52c7-5 14-1 16 6-7 3-14 1-16-6z" fill="#e0a870"/>
+        </g>
+      </g>
+      <g class="zzz" hidden fill="#8a7b6b" font-family="Georgia, serif" font-weight="700">
+        <text x="92" y="30" font-size="14">z</text><text x="102" y="20" font-size="10">z</text>
+      </g>
+    </svg>
+    <h1 id="greeting">hello</h1>
+    <form id="search" autocomplete="off">
+      <input id="q" type="search" placeholder="search with nook" aria-label="search" autofocus>
+      <button type="submit" aria-label="search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12.5 6.5L18 12l-5.5 5.5"/></svg></button>
+    </form>
+    <ul id="tiles" aria-label="places you visit"></ul>
+    <nav id="tools" aria-label="nook tools"></nav>
+
+    <div id="watching" hidden></div>
+    <div id="routine" hidden><div class="row"><span>around now you usually open</span><span id="routineList"></span><button id="routineOpen">open them</button></div></div>
+    <div id="daily" hidden><h3>today's featured article</h3><b id="dailyTitle"></b><p id="dailyText"></p><a id="dailyLink" href="#">read it</a></div>
+
+    <section id="cards" hidden>
+      <article class="mini"><h3>a note for today</h3><p id="noteOfDay"></p></article>
+      <article class="mini"><h3>read next</h3><ul id="readNext"></ul></article>
+      <article class="mini"><h3>weather</h3><p><a id="weatherLink" href="#">open it in nook</a></p></article>
+    </section>
+  </main>
+  <a id="gear" href="settings.html" title="wren settings" aria-label="wren settings">settings</a>
+
+  <div id="welcome" hidden>
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+      <header class="top">
+        <div class="bars" id="bars" aria-hidden="true"></div>
+        <button class="skip" id="skip">skip</button>
+      </header>
+
+      <div class="steps">
+        <section class="step" data-name="hello">
+          <div class="badge"><svg viewBox="0 0 128 128" aria-hidden="true"><rect x="6" y="6" width="116" height="116" rx="30" fill="#8a4b2a"/><g transform="translate(0 2)"><ellipse cx="62" cy="74" rx="28" ry="21" fill="#f4efe6"/><circle cx="42" cy="57" r="14" fill="#f4efe6"/><path d="M84 72C97 68 102 50 99 32c-1-4-7-3-7 1 0 14-6 22-17 27z" fill="#f4efe6"/><path d="M30 54L16 52l13 8z" fill="#f4efe6"/><path d="M52 70c8-6 22-5 30 4-8 10-26 10-34 1 1-2 2-3 4-5z" fill="#e0a870"/><circle cx="38" cy="54" r="2.6" fill="#8a4b2a"/></g></svg></div>
+          <h2 id="welcome-title">welcome to wren</h2>
+          <p>a quiet, warm place to browse. nothing is sent home on its own, and nothing follows you around.</p>
+        </section>
+
+        <section class="step" data-name="search">
+          <div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></div>
+          <h2>pick your search</h2>
+          <p class="soft">this is what the address bar uses. you can change it any time in settings.</p>
+          <div class="engines" id="engines" role="radiogroup" aria-label="search engine"><span class="soft">loading the list&hellip;</span></div>
+          <p class="soft" id="engineNote"></p>
+        </section>
+
+        <section class="step" data-name="default">
+          <div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M8 21h8M9 10.5l2.2 2.2L15.5 8.5"/></svg></div>
+          <h2>make wren your default?</h2>
+          <p>links from other programs will open here.</p>
+          <p class="soft" id="defaultNote"></p>
+          <button class="btn alt" id="makeDefault">make it my default</button>
+        </section>
+
+        <section class="step" data-name="import">
+          <div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11M8 10.5l4 4 4-4M4.5 17v2.5h15V17"/></svg></div>
+          <h2>bring your things along</h2>
+          <p>bookmarks, history and saved logins can move over from another browser.</p>
+          <p class="soft" id="importNote"></p>
+          <button class="btn alt" id="doImport">import from another browser</button>
+          <details class="ff" id="ffBox">
+            <summary>or from a firefox profile on this computer</summary>
+            <div id="ffImport"></div>
+          </details>
+        </section>
+
+        <section class="step" data-name="privacy">
+          <div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 2.8v5.7c0 4.4-2.9 7.4-7 9.5-4.1-2.1-7-5.1-7-9.5V5.8z"/><path d="M9 11.8l2.2 2.2 3.8-4"/></svg></div>
+          <h2>how careful should we be?</h2>
+          <div class="choices">
+            <button class="choice" data-privacy="standard"><b>balanced</b><span>blocks trackers and fingerprinting. sites keep working.</span></button>
+            <button class="choice" data-privacy="strict"><b>strict</b><span>blocks more. a few sites may need an exception.</span></button>
+          </div>
+        </section>
+
+        <section class="step" data-name="tips">
+          <div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.4 5.8.5-4.4 3.8 1.4 5.7L12 15.4 7 18.4l1.4-5.7L4 8.9l5.8-.5z"/></svg></div>
+          <h2>three things to try</h2>
+          <ul class="tips">
+            <li><kbd>Alt</kbd><kbd>Shift</kbd><kbd>K</kbd><span>a palette for everything wren can do</span></li>
+            <li><b>weather</b><span>type a question in the address bar: time, money, a word. you get the answer before you search</span></li>
+            <li><b>right-click</b><span>select any text and choose &ldquo;ask nook&rdquo;</span></li>
+          </ul>
+        </section>
+
+        <section class="step" data-name="done">
+          <div class="badge done"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="tick" d="M6 12.5l4 4 8-9"/></svg></div>
+          <h2 id="doneTitle">you're all set</h2>
+          <p id="doneText">pull up a chair. wren is ready when you are.</p>
+        </section>
+      </div>
+
+      <footer class="nav">
+        <button class="btn quiet" id="back">back</button>
+        <button class="btn" id="next">continue</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="hatch" hidden>
+    <svg viewBox="0 0 300 400" aria-hidden="true">
+      <defs>
+        <radialGradient id="shell" cx=".36" cy=".3" r=".85">
+          <stop offset="0" stop-color="#fffbf2"/><stop offset=".45" stop-color="#f5ead6"/><stop offset="1" stop-color="#d7c3a0"/>
+        </radialGradient>
+        <radialGradient id="inside" cx=".5" cy=".55" r=".6">
+          <stop offset="0" stop-color="#ffe3b0"/><stop offset="1" stop-color="#b9763e"/>
+        </radialGradient>
+        <radialGradient id="burst" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#fff1cc" stop-opacity=".95"/><stop offset=".5" stop-color="#ffc77a" stop-opacity=".4"/><stop offset="1" stop-color="#ffc77a" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+        <filter id="glowblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter>
+        <clipPath id="cut-top"><polygon points="20,-40 280,-40 280,201 262,198 236,178 208,204 180,174 152,206 126,172 98,204 70,176 40,200 20,201"/></clipPath>
+        <clipPath id="cut-bottom"><polygon points="20,201 40,200 70,176 98,204 126,172 152,206 180,174 208,204 236,178 262,198 280,201 280,440 20,440"/></clipPath>
+        <path id="eggshape" d="M150 26C96 26 52 124 52 218c0 78 43 134 98 134s98-56 98-134C248 124 204 26 150 26z"/>
+      </defs>
+
+      <ellipse class="shadow" cx="150" cy="364" rx="92" ry="12" fill="#000" opacity=".28" filter="url(#soft)"/>
+      <circle class="burst" cx="150" cy="210" r="170" fill="url(#burst)"/>
+
+      <g class="chick">
+        <g transform="translate(0 30)"><g class="chick-body">
+          <ellipse cx="156" cy="268" rx="62" ry="46" fill="#8a4b2a"/>
+          <circle cx="104" cy="226" r="31" fill="#8a4b2a"/>
+          <path d="M196 262c30-9 40-52 33-96-3-9-17-7-17 3 0 32-14 52-40 62z" fill="#8a4b2a"/>
+          <path d="M76 220L42 214l32 18z" fill="#8a4b2a"/>
+          <path d="M136 260c18-12 50-12 68 8-18 20-60 20-78 0 3-3 5-5 10-8z" fill="#e0a870"/>
+          <path d="M128 304v14M154 304v14" stroke="#8a4b2a" stroke-width="7" stroke-linecap="round"/>
+          <g class="eye"><circle cx="96" cy="220" r="5.4" fill="#f4efe6"/><circle cx="98" cy="218" r="1.7" fill="#8a4b2a"/></g>
+          <path class="tuft" d="M99 192c-2-9 1-16 7-20M109 194c1-9 6-14 12-16" stroke="#8a4b2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </g></g>
+      </g>
+
+      <g class="egg">
+        <g class="bottom" clip-path="url(#cut-bottom)">
+          <use href="#eggshape" fill="url(#shell)"/>
+          <use href="#eggshape" fill="none" stroke="#cdb78f" stroke-width="2.5"/>
+          <g fill="#8a5a36" opacity=".26"><circle cx="110" cy="262" r="4"/><circle cx="168" cy="300" r="3.4"/><circle cx="206" cy="256" r="3"/><circle cx="130" cy="318" r="2.6"/><circle cx="82" cy="236" r="2.8"/><circle cx="186" cy="332" r="2.2"/><circle cx="224" cy="292" r="2.4"/></g>
+        </g>
+        <g class="top" clip-path="url(#cut-top)">
+          <use href="#eggshape" fill="url(#shell)"/>
+          <use href="#eggshape" fill="none" stroke="#cdb78f" stroke-width="2.5"/>
+          <g fill="#8a5a36" opacity=".26"><circle cx="132" cy="78" r="3.6"/><circle cx="178" cy="104" r="3"/><circle cx="104" cy="132" r="4.2"/><circle cx="198" cy="150" r="2.6"/><circle cx="150" cy="58" r="2.2"/><circle cx="126" cy="170" r="2.8"/><circle cx="214" cy="118" r="2.4"/><circle cx="88" cy="178" r="2.2"/></g>
+          <ellipse cx="108" cy="104" rx="20" ry="46" transform="rotate(18 108 104)" fill="#fff" opacity=".5" filter="url(#soft)"/>
+        </g>
+        <g class="cracks">
+          <path class="glow-line" d="M150 62L140 94L156 116L142 142L158 164L148 188" />
+          <path class="glow-line" d="M52 200L70 176L98 204L126 172L152 206L180 174L208 204L236 178L248 200"/>
+          <path class="crack-line" d="M150 62L140 94L156 116L142 142L158 164L148 188"/>
+          <path class="crack-line" d="M52 200L70 176L98 204L126 172L152 206L180 174L208 204L236 178L248 200"/>
+        </g>
+      </g>
+
+      <g class="shards" fill="#f5ead6" stroke="#cdb78f" stroke-width="2">
+        <path class="s1" d="M126 192l11-15 6 17z"/><path class="s2" d="M190 188l15-11-3 19z"/><path class="s3" d="M152 204l8-9 5 13z"/>
+      </g>
+      <g class="sparkles" fill="#ffd9a0">
+        <path class="sp a" d="M60 120l4-12 4 12 12 4-12 4-4 12-4-12-12-4z"/>
+        <path class="sp b" d="M236 96l3-9 3 9 9 3-9 3-3 9-3-9-9-3z"/>
+        <path class="sp c" d="M252 230l3-9 3 9 9 3-9 3-3 9-3-9-9-3z"/>
+        <path class="sp d" d="M44 262l3-9 3 9 9 3-9 3-3 9-3-9-9-3z"/>
+      </g>
+    </svg>
+    <div class="hello-text">hello, small thing.<br><span>welcome to wren</span></div>
+  </div>
+  <button id="musicBtn" hidden></button>
+  <div id="ambient" hidden><canvas id="ambientCanvas"></canvas><div id="ambientClock"></div></div>
+
+  <script src="../lib/common.js"></script>
+  <script src="start.js"></script>
+  <script src="start2.js"></script>
+  <script src="scenes.js"></script>
+  <script src="music.js"></script>
+  <script src="engine-icons.js"></script>
+  <script src="firefox-import.js"></script>
+  <script src="welcome.js"></script>
+  <script src="hatch.js"></script>
+</body>
+</html>

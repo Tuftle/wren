@@ -1,0 +1,101 @@
+{
+  "manifest_version": 2,
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "wren-theme@wren.local"
+    }
+  },
+
+  "name": "Wren",
+  "description": "Warm cream and brown, in serif type. Follows your system's light or dark setting.",
+  "author": "Wren",
+  "version": "1.0.0",
+  "icons": { "32": "icon.svg" },
+
+  "theme": {
+    "colors": {
+      "frame": "#e9e1d2",
+      "frame_inactive": "#efe8da",
+      "toolbar": "#f4efe6",
+      "toolbar_text": "#3b2f25",
+      "toolbar_vertical_separator": "#d9cfbf",
+      "toolbar_top_separator": "transparent",
+      "toolbar_bottom_separator": "#d9cfbf",
+      "toolbar_field": "#ebe3d4",
+      "toolbar_field_text": "#3b2f25",
+      "toolbar_field_border": "#d9cfbf",
+      "toolbar_field_focus": "#fbf8f2",
+      "toolbar_field_text_focus": "#3b2f25",
+      "toolbar_field_border_focus": "#8a4b2a",
+      "toolbar_field_highlight": "#e3c6ae",
+      "toolbar_field_highlight_text": "#3b2f25",
+      "tab_text": "#3b2f25",
+      "tab_background_text": "#6b5d4f",
+      "tab_selected": "#f4efe6",
+      "tab_line": "#8a4b2a",
+      "tab_loading": "#8a4b2a",
+      "icons": "#6b5d4f",
+      "icons_attention": "#8a4b2a",
+      "bookmark_text": "#3b2f25",
+      "button_background_hover": "#e3d9c7",
+      "button_background_active": "#d9cfbf",
+      "popup": "#f4efe6",
+      "popup_text": "#3b2f25",
+      "popup_border": "#d9cfbf",
+      "popup_highlight": "#e3d9c7",
+      "popup_highlight_text": "#3b2f25",
+      "sidebar": "#efe8da",
+      "sidebar_text": "#3b2f25",
+      "sidebar_border": "#d9cfbf",
+      "sidebar_highlight": "#8a4b2a",
+      "sidebar_highlight_text": "#fbf8f2",
+      "ntp_background": "#f4efe6",
+      "ntp_text": "#3b2f25",
+      "focus_outline": "#8a4b2a"
+    }
+  },
+
+  "dark_theme": {
+    "colors": {
+      "frame": "#191510",
+      "frame_inactive": "#1d1813",
+      "toolbar": "#211c17",
+      "toolbar_text": "#e6dccd",
+      "toolbar_vertical_separator": "#3a3128",
+      "toolbar_top_separator": "transparent",
+      "toolbar_bottom_separator": "#3a3128",
+      "toolbar_field": "#2b241d",
+      "toolbar_field_text": "#e6dccd",
+      "toolbar_field_border": "#3a3128",
+      "toolbar_field_focus": "#17130f",
+      "toolbar_field_text_focus": "#e6dccd",
+      "toolbar_field_border_focus": "#d9a073",
+      "toolbar_field_highlight": "#5a3d28",
+      "toolbar_field_highlight_text": "#f4efe6",
+      "tab_text": "#e6dccd",
+      "tab_background_text": "#9a8b7a",
+      "tab_selected": "#211c17",
+      "tab_line": "#d9a073",
+      "tab_loading": "#d9a073",
+      "icons": "#b8a995",
+      "icons_attention": "#d9a073",
+      "bookmark_text": "#e6dccd",
+      "button_background_hover": "#2f271f",
+      "button_background_active": "#3a3128",
+      "popup": "#211c17",
+      "popup_text": "#e6dccd",
+      "popup_border": "#3a3128",
+      "popup_highlight": "#2f271f",
+      "popup_highlight_text": "#e6dccd",
+      "sidebar": "#1d1813",
+      "sidebar_text": "#e6dccd",
+      "sidebar_border": "#3a3128",
+      "sidebar_highlight": "#d9a073",
+      "sidebar_highlight_text": "#211c17",
+      "ntp_background": "#211c17",
+      "ntp_text": "#e6dccd",
+      "focus_outline": "#d9a073"
+    }
+  }
+}

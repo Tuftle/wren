@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren palette</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .wrap { padding: .8rem; display: flex; flex-direction: column; height: 100%; gap: .6rem; }
+    #q { width: 100%; font-size: 1.1rem; padding: .7rem 1rem; border-radius: 999px; }
+    #list { flex: 1; overflow: auto; margin: 0; }
+    #list li { cursor: pointer; border: 0; padding: .5rem .8rem; border-radius: .7rem; }
+    #list li.on { background: color-mix(in srgb, var(--link) 18%, transparent); }
+    #list .hint { color: var(--soft); font-size: .8rem; margin-left: auto; }
+    #msg { color: var(--soft); font-size: .85rem; min-height: 1.2rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <input id="q" type="search" placeholder="what would you like to do?" autofocus>
+    <ul class="list" id="list"></ul>
+    <div id="msg"></div>
+  </div>
+  <script src="../lib/common.js"></script>
+  <script src="palette.js"></script>
+</body>
+</html>

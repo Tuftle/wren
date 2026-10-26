@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren settings</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main class="app">
+    <h1>wren settings</h1>
+    <p class="lede">the small things that are particular to wren. everything is saved in this browser only.</p>
+
+    <section class="card">
+      <h2>start page</h2>
+      <label class="switch"><input type="checkbox" data-key="seasonal"><div><b>seasonal bird</b><span>the bird wears a scarf in winter, sits under blossoms in spring, and so on.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="pet"><div><b>wren pet</b><span>a little bird that naps when you are away.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="topSites"><div><b>places you visit</b><span>the row of recent sites under the search box.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="widgets"><div><b>cards under the search box</b><span>a note, your reading list and a nook weather link.</span></div></label>
+    </section>
+
+    <section class="card">
+      <h2>privacy and tidiness</h2>
+      <label class="switch"><input type="checkbox" data-key="safeLinks"><div><b>check links before they open</b><span>warns when a link shows one address but goes to another.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="riskyDownloads"><div><b>warn about risky downloads</b><span>a note when a file can run programs, like .exe or .bat.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="sweeper"><div><b>clear a site's cookies when its last tab closes</b><span>sites on the keep list below stay signed in.</span></div></label>
+      <p class="soft">keep signed in to (one site per line)</p>
+      <textarea id="keep" rows="3" placeholder="example.com"></textarea>
+      <p class="soft">forget history older than <input id="days" type="number" min="0" max="3650" style="width:5rem"> days (0 keeps it all)</p>
+    </section>
+
+    <section class="card">
+      <h2>feel</h2>
+      <label class="switch"><input type="checkbox" data-key="siteTint"><div><b>tint the window to the site</b><span>the toolbar and tabs take a soft shade of the page you are on.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="timeTint"><div><b>light of the day</b><span>the window warms at sunrise and dusk, and dims at night.</span></div></label>
+      <p class="soft">mood <select id="mood"><option value="default">wren</option><option value="library">library</option><option value="train">late train</option><option value="seaside">seaside</option></select> &middot; changes colours, the start-page scene and a sound</p>
+      <label class="switch"><input type="checkbox" data-key="music"><div><b>welcome music</b><span>a soft music-box tune on the first run, and when you replay the hatching.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="ambient"><div><b>ambient mode</b><span>after a few minutes alone, the start page becomes a calm moving scene. any key brings it back.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="bedtime"><div><b>bedtime mode</b><span>at night: dim, quiet, your focus list blocked, and soft rain.</span></div></label>
+      <p class="soft">from <input id="bedFrom" type="number" min="0" max="23" style="width:4rem"> to <input id="bedTo" type="number" min="0" max="23" style="width:4rem"> o'clock <label><input type="checkbox" data-key="bedSound"> rain</label></p>
+    </section>
+
+    <section class="card">
+      <h2>start page extras</h2>
+      <label class="switch"><input type="checkbox" data-key="routine"><div><b>what I usually open</b><span>around this time, from your own history, only on this computer.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="dailyGood"><div><b>a daily good thing</b><span>shows today's featured article. this asks wikipedia once a day, so it is off until you turn it on.</span></div></label>
+    </section>
+
+    <section class="card">
+      <h2>on the page</h2>
+      <label class="switch"><input type="checkbox" data-key="highlights"><div><b>highlights</b><span>select text and press &ldquo;highlight&rdquo;. they come back when you revisit the page.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="peek"><div><b>link peek</b><span>press and hold a link to see the opening of its page.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="hints"><div><b>keyboard link hints</b><span>press <b>f</b> on a page, then the letters on a link. <b>Shift+F</b> opens it in a new tab.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="drafts"><div><b>draft saver</b><span>text you type in big boxes is kept for a week, and offered back if the page is lost.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="snippetsOn"><div><b>snippets</b><span>type ;name and a space to expand a saved phrase. edit them in wren tools.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="linkClean"><div><b>clean links</b><span>removes tracking bits (utm_, fbclid and the like) from addresses before pages load.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="clipboardShelf"><div><b>clipboard shelf</b><span>remembers the last 20 things you copied here, in memory only.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="digest"><div><b>gather notifications</b><span>page notifications are collected in wren tools instead of popping up.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="timeReport"><div><b>time report</b><span>counts the time you spend on each site, only here. see it from the palette.</span></div></label>
+    </section>
+
+    <section class="card">
+      <h2>tabs</h2>
+      <label class="switch"><input type="checkbox" data-key="sleepTabs"><div><b>sleep idle tabs</b><span>tabs you have not looked at for a while are unloaded to save memory, and wake when you click them.</span></div></label>
+      <p class="soft">sleep after <input id="sleepMinutes" type="number" min="5" max="1440" style="width:5rem"> minutes</p>
+    </section>
+
+    <section class="card">
+      <h2>evening shade</h2>
+      <label class="switch"><input type="checkbox" data-key="shade"><div><b>shade pages now</b><span>a warm, dim tint over every page.</span></div></label>
+      <label class="switch"><input type="checkbox" data-key="shadeAuto"><div><b>shade at night</b><span>on by itself between these hours.</span></div></label>
+      <p class="soft">from <input id="shadeFrom" type="number" min="0" max="23" style="width:4rem"> to <input id="shadeTo" type="number" min="0" max="23" style="width:4rem"> o'clock &middot; strength <input id="shadeLevel" type="range" min="0" max="100" style="vertical-align:middle"></p>
+    </section>
+
+    <section class="card">
+      <h2>mail glance</h2>
+      <label class="switch"><input type="checkbox" data-key="mail"><div><b>show the unread count on the wren button</b><span>asks the mail feed below while you are signed in. it counts only: it does not read your messages.</span></div></label>
+      <p class="soft">feed address (gmail's is the default)</p>
+      <input id="feed" type="url" style="width:100%">
+    </section>
+
+    <section class="card">
+      <h2>focus</h2>
+      <p class="soft">focus mode lasts <input id="minutes" type="number" min="1" max="240" style="width:5rem"> minutes, then plays a soft chime.</p>
+    </section>
+
+    <p class="soft" id="saved">&nbsp;</p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

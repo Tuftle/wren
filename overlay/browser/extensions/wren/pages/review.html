@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>your year</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; margin-bottom: 1.4rem; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 1.1rem; padding: 1rem 1.1rem; }
+    .stat .n { font-size: 2.3rem; line-height: 1.1; color: var(--link); }
+    .stat .l { color: var(--soft); font-size: .88rem; }
+  </style>
+</head>
+<body>
+  <main class="app" style="max-width:56rem">
+    <h1 id="head">your year</h1>
+    <p class="lede">worked out here, from your own history and lists. nothing leaves this computer.</p>
+    <div class="stats" id="stats"></div>
+    <section class="card"><h2>the sites you came back to most</h2><div class="bars" id="top"></div></section>
+    <section class="card"><h2>when you browse</h2><div class="bars" id="hours"></div></section>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="review.js"></script>
+</body>
+</html>

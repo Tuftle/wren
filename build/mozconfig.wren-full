@@ -1,0 +1,24 @@
+# Wren, built fully from source (not the artifact build that mozconfig does).
+# Use it with:  MOZCONFIG=C:\mozilla-source\firefox\mozconfig.full ./mach build
+# The output lives on drive I: because the C: drive does not have room for it.
+
+mk_add_options MOZ_OBJDIR=I:/mozilla-obj/wren
+ac_add_options --with-branding=browser/branding/wren
+ac_add_options --with-app-basename=Wren
+
+ac_add_options --enable-bootstrap
+ac_add_options --enable-optimize
+ac_add_options --disable-debug
+ac_add_options --disable-tests
+ac_add_options --disable-crashreporter
+ac_add_options --disable-updater
+
+# The build tools come from the bootstrap (clang-cl). Windows has an empty stray file called cl.exe in its
+# system folder that the build would otherwise pick up first, so the compilers are named here.
+export CC=clang-cl
+export CXX=clang-cl
+export HOST_CC=clang-cl
+export HOST_CXX=clang-cl
+
+# The Visual Studio project files cannot be made when the output is on another drive; they are not needed to build.
+ac_add_options --enable-build-backends=RecursiveMake,FasterMake

@@ -1,0 +1,126 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* Wren's colours and type for every page that Firefox draws itself (Settings, Add-ons, error pages and
+ * the like). These rules are not in a layer, so they win over Mozilla's own tokens, and they are kept
+ * in this one file so that Mozilla's token files can still be updated without conflicts. */
+
+:root,
+:host(.anonymous-content-host) {
+  --wren-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+
+  /* the accent: brown on cream, amber on dark brown (instead of Firefox's blue and purple) */
+  --color-accent-primary: light-dark(#8a4b2a, #d9a073);
+  --color-accent-primary-hover: light-dark(#a15a34, #e6b58a);
+  --color-accent-primary-active: light-dark(#6f3b20, #c68b5e);
+  --color-accent-primary-selected: light-dark(#8a4b2a, #d9a073);
+
+  /* surfaces */
+  /* important: the Settings page sets its own canvas colour after this file loads */
+  --background-color-canvas: light-dark(#f4efe6, #211c17) !important;
+  --background-color-box: light-dark(#fbf8f2, #2a231c);
+  --background-color-box-info: light-dark(#ebe3d4, #2f271f);
+  --border-color: light-dark(#d9cfbf, #3a3128);
+  --border-color-interactive: light-dark(#b9a88f, #5a4b3d);
+
+  /* text */
+  --text-color: light-dark(#3b2f25, #e6dccd);
+  --text-color-deemphasized: light-dark(#8a7b6b, #9a8b7a);
+  --button-text-color: light-dark(#3b2f25, #e6dccd);
+  --button-text-color-primary: light-dark(#f4efe6, #211c17);
+}
+
+:root,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--wren-serif);
+}
+
+/* Settings: no Mozilla account, Labs, AI or "more from Mozilla" pages */
+#category-sync,
+#category-experimental,
+#category-ai-features,
+#category-more-from-mozilla {
+  display: none !important;
+}
+
+/* Firefox's violet and purple, wherever the browser or a built-in page uses them (hover and pressed
+ * highlights, badges, tab and sidebar accents), are given warm amber-and-brown steps. The "desaturated"
+ * violet is Firefox's hover grey: here it is a warm grey. */
+:root,
+:host(.anonymous-content-host) {
+  --color-violet-0: #fcf7ef;
+  --color-violet-10: #f6e8d3;
+  --color-violet-20: #efd6b5;
+  --color-violet-30: #e8c294;
+  --color-violet-40: #e0ad76;
+  --color-violet-50: #d9a073;
+  --color-violet-60: #b9784a;
+  --color-violet-70: #8a4b2a;
+  --color-violet-80: #6f3b20;
+  --color-violet-90: #4f2915;
+  --color-violet-100: #36200f;
+  --color-violet-110: #26170a;
+  --color-purple-0: var(--color-violet-0);
+  --color-purple-10: var(--color-violet-10);
+  --color-purple-20: var(--color-violet-20);
+  --color-purple-30: var(--color-violet-30);
+  --color-purple-40: var(--color-violet-40);
+  --color-purple-50: var(--color-violet-50);
+  --color-purple-60: var(--color-violet-60);
+  --color-purple-70: var(--color-violet-70);
+  --color-purple-80: var(--color-violet-80);
+  --color-purple-90: var(--color-violet-90);
+  --color-purple-100: var(--color-violet-100);
+  --color-purple-110: var(--color-violet-110);
+  --color-violet-desaturated-0: #faf6ef;
+  --color-violet-desaturated-10: #f1eadc;
+  --color-violet-desaturated-20: #e3d9c7;
+  --color-violet-desaturated-30: #d9cfbf;
+  --color-violet-desaturated-40: #4a3d31;
+  --color-violet-desaturated-50: #3a3128;
+  --color-violet-desaturated-60: #31291f;
+  --color-violet-desaturated-70: #2a231c;
+  --color-violet-desaturated-80: #231d17;
+  --color-violet-desaturated-90: #1a1511;
+}
+
+/* The two windows that choose and create profiles (about:profiles opens the second one) */
+window[data-l10n-id="profile-selection-window"],
+#createProfileWizard {
+  background-color: light-dark(#f4efe6, #211c17) !important;
+  color: light-dark(#3b2f25, #e6dccd) !important;
+  accent-color: light-dark(#8a4b2a, #d9a073);
+}
+#createProfileWizard .wizard-header,
+#createProfileWizard .wizard-buttons {
+  background-color: light-dark(#ebe3d4, #2a231c) !important;
+  color: inherit !important;
+  border-color: light-dark(#d9cfbf, #3a3128) !important;
+}
+#createProfileWizard wizardpage,
+#createProfileWizard .wizard-page-box {
+  background: none !important;
+}
+#profiles {
+  background-color: light-dark(#fbf8f2, #2a231c) !important;
+  color: inherit !important;
+  border-color: light-dark(#d9cfbf, #3a3128) !important;
+  border-radius: 12px;
+}
+#profiles richlistitem:hover {
+  background-color: light-dark(#efe5d3, #342a21) !important;
+}
+#profiles richlistitem[selected] {
+  background-color: light-dark(#e8c9a6, #5a3d26) !important;
+  color: light-dark(#3b2f25, #f4efe6) !important;
+}
+#createProfileWizard input[type="text"] {
+  background-color: light-dark(#fbf8f2, #1b1611) !important;
+  border-color: light-dark(#b9a88f, #5a4b3d) !important;
+  color: inherit !important;
+}

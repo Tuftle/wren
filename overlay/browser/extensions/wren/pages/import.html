@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>import from firefox</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="welcome.css">
+  <style>.ff-card select { max-width: 30rem; }</style>
+</head>
+<body>
+  <main class="app">
+    <h1>bring things from firefox</h1>
+    <p class="lede">pick one of the firefox profiles on this computer. wren reads a copy of its files, so the old profile stays exactly as it was.</p>
+    <section class="card ff-card" id="ffImport"></section>
+    <p class="soft">other browsers (chrome, edge, brave) and passwords from a file: use the import window from wren's settings.</p>
+    <p><button class="btn alt" id="more">open the other import window</button></p>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="firefox-import.js"></script>
+  <script>
+    WrenFirefoxImport.mount(document.getElementById("ffImport"));
+    document.getElementById("more").addEventListener("click", () => browser.wren.openImport());
+  </script>
+</body>
+</html>

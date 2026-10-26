@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>clean pdf</title>
+  <link rel="stylesheet" href="wren.css">
+  <style>
+    body { background: #fff; color: #222; text-transform: none; }
+    main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-size: 1.05rem; line-height: 1.7; }
+    h1 { font-weight: 400; line-height: 1.2; }
+    img { max-width: 100%; }
+    a { color: #8a4b2a; }
+    pre { white-space: pre-wrap; background: #f6f1e8; padding: .8rem; }
+    .bar { position: sticky; top: 0; background: #f4efe6; padding: .6rem 1rem; display: flex; gap: .8rem; align-items: center; border-bottom: 1px solid #d9cfbf; }
+    .bar button { font: inherit; border: 0; border-radius: 999px; background: #8a4b2a; color: #f4efe6; padding: .4em 1.2em; cursor: pointer; }
+    .src { color: #777; font-size: .85rem; }
+    @media print { .bar { display: none; } main { padding: 0; } }
+  </style>
+</head>
+<body>
+  <div class="bar"><button id="pdf">save as pdf</button><button id="print">print</button><span class="src">only the article is kept: no menus, banners or ads.</span></div>
+  <main>
+    <h1 id="title"></h1>
+    <p class="src" id="src"></p>
+    <div id="body"></div>
+  </main>
+  <script src="clean.js"></script>
+</body>
+</html>

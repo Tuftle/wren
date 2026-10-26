@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren pages</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <main class="app wide">
+    <header class="head">
+      <h1>wren pages</h1>
+      <nav class="tabs" id="tabs">
+        <button data-tab="notes" class="on">notes</button>
+        <button data-tab="sheet">sheet</button>
+        <button data-tab="draw">draw</button>
+      </nav>
+    </header>
+    <p class="soft">everything here is saved only in this browser. &ldquo;export&rdquo; makes a file you can keep anywhere.</p>
+
+    <section id="notes" class="pane on">
+      <div class="notes">
+        <aside>
+          <button class="btn small" id="newNote">new note</button>
+          <ul class="list" id="noteList"></ul>
+        </aside>
+        <div class="editor">
+          <input id="noteTitle" type="text" placeholder="title">
+          <textarea id="noteBody" rows="22" placeholder="start writing"></textarea>
+          <div class="row">
+            <button class="btn small" id="exportNote">export as text</button>
+            <label class="btn small alt">import a text file <input type="file" id="importNote" accept=".txt,.md" hidden></label>
+            <button class="btn small quiet" id="deleteNote">delete</button>
+            <span class="soft grow" id="noteSaved"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sheet" class="pane">
+      <div class="row">
+        <button class="btn small" id="addRows">more rows</button>
+        <button class="btn small" id="exportCsv">export csv</button>
+        <label class="btn small alt">import csv <input type="file" id="importCsv" accept=".csv" hidden></label>
+        <span class="soft">type numbers or text. start with = for a sum or a formula, like =SUM(A1:A5) or =B2*C2.</span>
+      </div>
+      <div class="gridwrap"><table id="grid"></table></div>
+    </section>
+
+    <section id="draw" class="pane">
+      <div class="row">
+        <input type="color" id="ink" value="#8a4b2a">
+        <input type="range" id="size" min="1" max="40" value="4">
+        <button class="btn small alt" id="eraser">eraser</button>
+        <button class="btn small alt" id="undo">undo</button>
+        <button class="btn small quiet" id="clear">clear</button>
+        <button class="btn small" id="exportPng">export png</button>
+      </div>
+      <canvas id="canvas" width="1100" height="640"></canvas>
+    </section>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="pages.js"></script>
+</body>
+</html>

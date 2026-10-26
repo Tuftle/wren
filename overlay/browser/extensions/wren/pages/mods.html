@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mods</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .item { display: flex; gap: 1rem; align-items: center; padding: .8rem 0; border-top: 1px solid var(--line); }
+    .item:first-child { border-top: 0; }
+    .item .t { flex: 1; min-width: 0; } .item b { font-weight: 400; display: block; }
+    pre { background: color-mix(in srgb, var(--bg) 60%, var(--card)); border: 1px solid var(--line); border-radius: .7rem; padding: .7rem .9rem; max-height: 14rem; overflow: auto; font-size: .82rem; white-space: pre-wrap; text-transform: none; }
+    #pending { border-color: var(--link); }
+    ul.prefs { margin: .3rem 0 .6rem; padding-left: 1.2rem; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>mods</h1>
+    <p class="lede">small files that change how wren looks. anyone can write one. wren shows you exactly what a mod does before it is added, and a mod can only restyle the window: it cannot read your pages or send anything anywhere.</p>
+
+    <section class="card" id="pending" hidden>
+      <h2><span>add this mod?</span><span class="pill" id="pVersion"></span></h2>
+      <p><b id="pName"></b> <span class="soft">by <span id="pAuthor"></span></span></p>
+      <p class="soft" id="pDesc"></p>
+      <div id="pPrefsBox" hidden><p class="soft">it also changes these settings:</p><ul class="prefs" id="pPrefs"></ul></div>
+      <p class="soft" id="pSites" hidden></p>
+      <details><summary class="soft">show the style</summary><pre id="pCss"></pre></details>
+      <p class="row" style="margin-top:.8rem"><button class="btn small" id="pAdd">add mod</button><button class="btn small alt" id="pNo">not now</button></p>
+    </section>
+
+    <section class="card">
+      <h2><span>made for wren</span></h2>
+      <div id="builtin"></div>
+    </section>
+
+    <section class="card">
+      <h2><span>your mods</span><a href="https://tuftle.vercel.app/wren/addons" class="soft">browse more</a></h2>
+      <div id="list"></div>
+      <p class="soft" id="empty" hidden>nothing added yet. the add-ons site has a few to start with.</p>
+    </section>
+
+    <section class="card">
+      <h2>write or paste your own</h2>
+      <p class="soft">paste a mod (json), or choose a file. the format is explained at tuftle.vercel.app/wren/addons/build.</p>
+      <textarea id="paste" rows="6" placeholder='{ "format": 1, "id": "my-mod", "name": "my mod", "css": "#nav-bar { background: #f4efe6 !important; }" }' spellcheck="false"></textarea>
+      <p class="row"><button class="btn small" id="check">check it</button><label class="btn small alt">choose a file<input type="file" id="file" accept=".json,application/json" hidden></label><span class="soft" id="note"></span></p>
+    </section>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="mods.js"></script>
+</body>
+</html>

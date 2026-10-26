@@ -1,0 +1,18 @@
+[package]
+name = "wren-setup"
+version = "0.1.0"
+edition = "2021"
+description = "The Wren installer: a small branded window that runs Wren's own setup quietly"
+
+[dependencies]
+eframe = { version = "0.31", default-features = false, features = ["glow", "default_fonts"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[build-dependencies]
+winres = "0.1"

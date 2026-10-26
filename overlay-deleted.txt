@@ -1,0 +1,1 @@
+browser/components/shell/icons/pride.ico

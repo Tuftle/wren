@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren tools</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>.pane { display: none; } .pane.on { display: block; } .list li { flex-wrap: wrap; }</style>
+</head>
+<body>
+  <main class="app">
+    <h1>wren tools</h1>
+    <p class="lede">your lists and little editors. everything here is saved only in this browser.</p>
+    <nav class="tabs" id="tabs">
+      <button data-tab="workspaces" class="on">workspaces</button>
+      <button data-tab="sessions">sessions</button>
+      <button data-tab="highlights">highlights</button>
+      <button data-tab="saved">saved copies</button>
+      <button data-tab="snippets">snippets</button>
+      <button data-tab="shortcuts">search shortcuts</button>
+      <button data-tab="blocklist">focus blocklist</button>
+      <button data-tab="watch">watched pages</button>
+      <button data-tab="remind">reminders</button>
+      <button data-tab="digest">notifications</button>
+      <button data-tab="clips">clipboard</button>
+    </nav>
+
+    <section class="pane on" id="workspaces">
+      <p class="soft">a workspace is a set of tabs. switching hides the others, and brings them back when you return.</p>
+      <form class="row" id="wsForm"><input class="grow" id="wsName" type="text" placeholder="new workspace, like study"><button class="btn small">add</button></form>
+      <ul class="list" id="wsList"></ul>
+    </section>
+
+    <section class="pane" id="sessions">
+      <p class="soft">save every window and tab under a name, and open it again later.</p>
+      <form class="row" id="sesForm"><input class="grow" id="sesName" type="text" placeholder="name, like thesis"><button class="btn small">save all my tabs</button></form>
+      <ul class="list" id="sesList"></ul>
+    </section>
+
+    <section class="pane" id="highlights"><p class="soft">text you marked on pages. alt-click a highlight on a page to remove it.</p><ul class="list" id="hlList"></ul></section>
+    <section class="pane" id="saved"><p class="soft">readable copies of pages you saved to a board.</p><input id="savedFind" type="search" placeholder="search inside them" style="width:100%"><ul class="list" id="savedList"></ul></section>
+
+    <section class="pane" id="snippets">
+      <p class="soft">type a semicolon, the short name and a space in any text box, and it becomes the text. like <b>;addr </b></p>
+      <form class="row" id="snForm"><input id="snKey" type="text" placeholder="short name" style="width:9rem"><input class="grow" id="snText" type="text" placeholder="the text"><button class="btn small">save</button></form>
+      <ul class="list" id="snList"></ul>
+    </section>
+
+    <section class="pane" id="shortcuts">
+      <p class="soft">search with a shortcut in the address bar: type <b>w cats</b> to search wikipedia. use %s where your words go.</p>
+      <form class="row" id="scForm"><input id="scKey" type="text" placeholder="shortcut" style="width:7rem"><input class="grow" id="scUrl" type="url" placeholder="https://example.com/search?q=%s"><button class="btn small">save</button></form>
+      <ul class="list" id="scList"></ul>
+    </section>
+
+    <section class="pane" id="blocklist">
+      <p class="soft">sites that wait until focus mode is over (Alt+Shift+F). one site per line.</p>
+      <textarea id="blText" rows="6" placeholder="example.com"></textarea>
+    </section>
+
+    <section class="pane" id="watch">
+      <p class="soft">wren checks these pages every half hour and tells you when their text changes. add one from the palette (Alt+Shift+K) with &ldquo;watch this page&rdquo;.</p>
+      <button class="btn small" id="watchNow">check now</button>
+      <ul class="list" id="watchList"></ul>
+    </section>
+
+    <section class="pane" id="remind"><p class="soft">pages you asked to be reminded about.</p><ul class="list" id="remList"></ul></section>
+
+    <section class="pane" id="digest">
+      <p class="soft">notifications that pages tried to show while the digest is on (turn it on in settings), kept here instead.</p>
+      <button class="btn small quiet" id="digestClear">clear</button>
+      <ul class="list" id="digestList"></ul>
+    </section>
+
+    <section class="pane" id="clips">
+      <p class="soft">the last things you copied in the browser (turn the shelf on in settings). kept in memory only: gone when wren closes.</p>
+      <ul class="list" id="clipList"></ul>
+    </section>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="tools.js"></script>
+</body>
+</html>

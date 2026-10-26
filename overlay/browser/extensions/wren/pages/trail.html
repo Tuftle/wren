@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>trail</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .wrap { overflow: auto; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+    svg { display: block; }
+    .edge { fill: none; stroke: var(--soft); stroke-opacity: .5; stroke-width: 1.6; }
+    .node circle { stroke: var(--bg); stroke-width: 2; cursor: pointer; }
+    .node text { font: 11px Georgia, serif; fill: var(--bg); pointer-events: none; text-anchor: middle; text-transform: lowercase; }
+    .lane { font: 12px Georgia, serif; fill: var(--soft); text-transform: lowercase; }
+    .tip { position: fixed; background: var(--card); border: 1px solid var(--line); border-radius: .6rem; padding: .3rem .6rem; font-size: .85rem; pointer-events: none; max-width: 20rem; }
+  </style>
+</head>
+<body>
+  <main class="app" style="max-width:72rem">
+    <h1>trail</h1>
+    <p class="lede">how you moved from page to page. each row is a site, each dot a page, each line a step. kept only in this browser, for a week.</p>
+    <div class="row" style="margin-bottom:1rem"><select id="day"></select><span class="soft" id="count"></span></div>
+    <div class="wrap"><svg id="graph"></svg></div>
+  </main>
+  <div class="tip" id="tip" hidden></div>
+  <script src="../lib/common.js"></script>
+  <script src="trail.js"></script>
+</body>
+</html>

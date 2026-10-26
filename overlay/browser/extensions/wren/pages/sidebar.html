@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wren</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <nav class="tabs" id="tabs">
+    <button data-tab="nook" class="on">nook</button>
+    <button data-tab="notes">notes</button>
+    <button data-tab="sounds">sounds</button>
+    <button data-tab="boards">boards</button>
+  </nav>
+
+  <section id="nook" class="pane on">
+    <form id="nookForm" class="row"><input id="nookQ" class="grow" type="search" placeholder="ask nook"><button class="btn small">go</button></form>
+    <div class="row quick" id="nookLinks"></div>
+    <div class="frameWrap"><p class="soft">loading nook&hellip;</p><iframe id="frame" title="nook" referrerpolicy="no-referrer"></iframe></div>
+  </section>
+
+  <section id="notes" class="pane">
+    <textarea id="scratch" rows="10" placeholder="a scratchpad. it saves as you type, only here."></textarea>
+    <h2>to do</h2>
+    <form id="todoForm" class="row"><input id="todoText" class="grow" type="text" placeholder="add something"><button class="btn small">add</button></form>
+    <ul id="todos" class="list"></ul>
+  </section>
+
+  <section id="sounds" class="pane">
+    <div class="card">
+      <div class="grid">
+        <button class="tile" data-sound="rain"><b>rain</b><span>soft and steady</span></button>
+        <button class="tile" data-sound="fire"><b>fireplace</b><span>warm crackle</span></button>
+        <button class="tile" data-sound="cafe"><b>cafe</b><span>quiet murmur</span></button>
+        <button class="tile" data-sound="stop"><b>silence</b><span>stop</span></button>
+      </div>
+      <p class="soft">volume</p>
+      <input id="volume" type="range" min="0" max="100" value="50">
+      <p class="soft">they keep playing while you switch tabs.</p>
+    </div>
+  </section>
+
+  <section id="boards" class="pane">
+    <form id="boardForm" class="row"><input id="boardName" class="grow" type="text" placeholder="new board, like trip planning"><button class="btn small">add</button></form>
+    <div id="boardList"></div>
+  </section>
+
+  <script src="../lib/common.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+</html>

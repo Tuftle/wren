@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>postcard</title>
+  <link rel="stylesheet" href="wren.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    canvas { max-width: 100%; border-radius: 1rem; box-shadow: 0 16px 50px rgba(40, 25, 10, .25); display: block; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <main class="app" style="max-width:66rem">
+    <h1>postcard</h1>
+    <p class="lede">a page, a board or a quote as a single card you can share. made here, on this computer.</p>
+    <div class="row">
+      <button class="btn small" id="save">save as picture</button>
+      <button class="btn small alt" id="copy">copy picture</button>
+      <button class="btn small alt" id="theme">light or dark</button>
+      <span class="soft" id="state"></span>
+    </div>
+    <textarea id="quote" rows="3" placeholder="the words on the card" style="margin-top:.8rem"></textarea>
+    <canvas id="card" width="1200" height="630"></canvas>
+  </main>
+  <script src="../lib/common.js"></script>
+  <script src="postcard.js"></script>
+</body>
+</html>

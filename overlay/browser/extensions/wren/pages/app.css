@@ -1,0 +1,38 @@
+/* The look shared by Wren's tool pages: calm cards on cream (or dark brown). */
+body { text-transform: none; }
+.app { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.app.narrow { max-width: 28rem; padding: 1rem; }
+h1 { font-weight: 400; font-size: 1.9rem; margin: 0 0 .3rem; }
+h2 { font-weight: 400; font-size: 1.25rem; margin: 0 0 .6rem; }
+.lede { color: var(--soft); margin: 0 0 1.6rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 1.1rem; padding: 1.1rem 1.25rem; margin: 0 0 1rem; }
+.card h2 { display: flex; justify-content: space-between; align-items: baseline; }
+.card p { margin: .3rem 0; }
+.soft { color: var(--soft); font-size: .92rem; }
+.row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.grow { flex: 1; }
+.big { font-size: 2.2rem; line-height: 1.1; }
+.pill { display: inline-block; font-size: .82rem; border: 1px solid var(--line); border-radius: 999px; padding: .05em .7em; color: var(--soft); }
+input[type=text], input[type=search], input[type=url], input[type=number], textarea, select {
+  font: inherit; color: var(--text); background: color-mix(in srgb, var(--bg) 60%, var(--card)); border: 1px solid var(--line);
+  border-radius: .7rem; padding: .5rem .75rem; min-width: 0; }
+textarea { width: 100%; resize: vertical; line-height: 1.5; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--glow); border-color: var(--link); }
+.btn.small { padding: .35em 1em; font-size: .92rem; }
+.btn.danger { background: #a43f2c; color: #fff; box-shadow: none; }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: flex; gap: .6rem; align-items: center; padding: .45rem 0; border-top: 1px solid var(--line); }
+.list li:first-child { border-top: 0; }
+.list a { color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list .x { background: none; border: 0; color: var(--soft); }
+.switch { display: flex; gap: .8rem; align-items: flex-start; padding: .6rem 0; border-top: 1px solid var(--line); }
+.switch:first-of-type { border-top: 0; }
+.switch input { margin-top: .35rem; accent-color: var(--link); }
+.switch b { font-weight: 400; display: block; }
+.switch span { color: var(--soft); font-size: .9rem; display: block; }
+.tabs { display: flex; gap: .2rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; overflow-x: auto; }
+.tabs button { background: none; border: 0; padding: .55rem .8rem; color: var(--soft); border-bottom: 2px solid transparent; white-space: nowrap; }
+.tabs button.on { color: var(--text); border-color: var(--link); }
+.bars { display: grid; gap: .35rem; }
+.bar { display: grid; grid-template-columns: 7rem 1fr 3rem; gap: .6rem; align-items: center; font-size: .9rem; }
+.bar i { display: block; height: .5rem; border-radius: 1rem; background: var(--link); min-width: 2px; }
