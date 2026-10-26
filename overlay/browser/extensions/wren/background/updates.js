@@ -39,7 +39,7 @@ async function checkForUpdate() {
   if (!before || before.buildID != update.buildID) {
     browser.notifications.create("wren-update", {
       type: "basic",
-      iconUrl: browser.runtime.getURL("pages/bird.svg"),
+      iconUrl: browser.runtime.getURL("pages/bird-badge.svg"),
       title: "a new wren is ready",
       message: (update.notes ? update.notes + " " : "") + "click to update when it suits you.",
     });

@@ -179,7 +179,7 @@ async function fireReminder(id) {
   browser.tabs.create({ url: item.url, active: false });
   browser.notifications.create("remind-" + id, {
     type: "basic",
-    iconUrl: browser.runtime.getURL("pages/bird.svg"),
+    iconUrl: browser.runtime.getURL("pages/bird-badge.svg"),
     title: "you asked to be reminded",
     message: item.title || item.url,
   });

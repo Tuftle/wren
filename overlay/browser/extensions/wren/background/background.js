@@ -72,7 +72,7 @@ browser.alarms.onAlarm.addListener(async alarm => {
     await setFocus(false);
     browser.notifications.create("focus-end", {
       type: "basic",
-      iconUrl: browser.runtime.getURL("pages/bird.svg"),
+      iconUrl: browser.runtime.getURL("pages/bird-badge.svg"),
       title: "focus time is over",
       message: "nice work. the bars are back.",
     });
@@ -118,10 +118,12 @@ browser.tabs.query({}).then(tabs => tabs.forEach(t => tabHosts.set(t.id, wrenHos
 browser.downloads.onCreated.addListener(async item => {
   const { riskyDownloads } = await WrenSettings.get();
   const name = (item.filename || item.url || "").split(/[\\/?#]/).filter(Boolean).pop() || "";
-  if (riskyDownloads && RISKY.test(name)) {
+  // Wren's own installer and updates come from these places; warning about them would be noise
+  const ownSource = /^https:\/\/(github\.com\/Tuftle\/|tuftle\.vercel\.app\/)/.test(item.url || "");
+  if (riskyDownloads && RISKY.test(name) && !ownSource) {
     browser.notifications.create("risky-" + item.id, {
       type: "basic",
-      iconUrl: browser.runtime.getURL("pages/bird.svg"),
+      iconUrl: browser.runtime.getURL("pages/bird-badge.svg"),
       title: "careful with this file",
       message: name + " can run programs. only open it if you trust where it came from. wren can scan it for you in the privacy page.",
     });

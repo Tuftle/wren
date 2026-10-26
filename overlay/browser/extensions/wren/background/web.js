@@ -173,7 +173,7 @@ async function checkWatchers() {
         changed++;
         browser.notifications.create("watch-" + w.url, {
           type: "basic",
-          iconUrl: browser.runtime.getURL("pages/bird.svg"),
+          iconUrl: browser.runtime.getURL("pages/bird-badge.svg"),
           title: "a page you watch has changed",
           message: w.title || w.url,
         });

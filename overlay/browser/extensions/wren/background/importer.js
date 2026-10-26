@@ -57,7 +57,7 @@ const WrenImporter = (() => {
     state.finished = Date.now();
     try {
       await browser.notifications.create("wren-import-done", {
-        type: "basic", iconUrl: browser.runtime.getURL("pages/bird.svg"), title: "extensions added",
+        type: "basic", iconUrl: browser.runtime.getURL("pages/bird-badge.svg"), title: "extensions added",
         message: `added ${state.added.length} of ${state.total}` + (state.missed.length ? `. ${state.missed.length} could not be added.` : "."),
       });
     } catch (e) {

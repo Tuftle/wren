@@ -42,7 +42,7 @@ async function checkWeirdReports() {
     const note = String(done.message || "").slice(0, 300);
     browser.notifications.create("weird-" + report.id, {
       type: "basic",
-      iconUrl: browser.runtime.getURL("pages/bird.svg"),
+      iconUrl: browser.runtime.getURL("pages/bird-badge.svg"),
       title: report.host + " has been looked at",
       message: (note ? note + " " : "") + "try the site again. click to open it.",
     });
