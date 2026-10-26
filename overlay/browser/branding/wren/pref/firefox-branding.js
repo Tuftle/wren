@@ -56,6 +56,9 @@ pref("dom.security.https_first_pbm", true);
 // If this is less than 5, then pasting code into the web console is disabled
 pref("devtools.selfxss.count", 5);
 
+// --- websites: always include the "Firefox/x.y" token, even in builds that name the app something else
+pref("general.useragent.compatMode.firefox", true);
+
 // --- look: the Wren theme (cream and brown, follows the system's light/dark setting)
 pref("extensions.activeThemeID", "wren-theme@wren.local");
 
