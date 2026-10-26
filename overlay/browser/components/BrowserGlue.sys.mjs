@@ -781,6 +781,25 @@ BrowserGlue.prototype = {
 
     this._checkForOldBuildUpdates();
 
+    // Wren: the downloads button belongs in the toolbar. It stays out of sight until something is downloaded,
+    // then shows a progress ring and opens the downloads panel under it.
+    try {
+      const { CustomizableUI } = ChromeUtils.importESModule(
+        "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs"
+      );
+      if (!CustomizableUI.getPlacementOfWidget("downloads-button")) {
+        let ids = CustomizableUI.getWidgetIdsInArea(CustomizableUI.AREA_NAVBAR);
+        let at = ids.indexOf("unified-extensions-button");
+        CustomizableUI.addWidgetToArea(
+          "downloads-button",
+          CustomizableUI.AREA_NAVBAR,
+          at == -1 ? undefined : at
+        );
+      }
+    } catch (e) {
+      console.error("Wren: could not place the downloads button", e);
+    }
+
     // Check if Sync is configured
     if (Services.prefs.prefHasUserValue("services.sync.username")) {
       lazy.WeaveService.init();

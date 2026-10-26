@@ -167,3 +167,131 @@ panel,
     linear-gradient(var(--wren-time, transparent), var(--wren-time, transparent)),
     linear-gradient(var(--wren-mood, transparent), var(--wren-mood, transparent));
 }
+
+/* --- downloads: Chrome's rounded cards in a bubble under the toolbar, with Firefox's panel (and its buttons and footer) behind it --- */
+#downloadsPanel {
+  --wren-dl-card: light-dark(#fbf8f2, #2a231c);
+  --wren-dl-line: light-dark(#ddd2c1, #3a3128);
+  --wren-dl-text: light-dark(#3b2f25, #e6dccd);
+  --wren-dl-soft: light-dark(#8a7b6b, #9a8b7a);
+  --wren-dl-accent: light-dark(#8a4b2a, #d9a073);
+  --wren-dl-ground: light-dark(#f4efe6, #211c17);
+  --arrowpanel-background: var(--wren-dl-ground);
+  --arrowpanel-color: var(--wren-dl-text);
+  --arrowpanel-border-color: var(--wren-dl-line);
+  --arrowpanel-border-radius: 20px;
+  --arrowpanel-padding: 0;
+  font-family: var(--wren-serif);
+}
+
+#downloadsPanel-mainView > .panel-view-body-unscrollable::before {
+  content: "downloads";
+  display: block;
+  padding: 16px 20px 10px;
+  font-size: 1.15em;
+  color: var(--wren-dl-text);
+}
+
+#downloadsListBox {
+  width: 400px !important;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+#downloadsListBox > richlistitem {
+  background: var(--wren-dl-card);
+  border: 1px solid var(--wren-dl-line);
+  border-radius: 16px;
+  margin: 0 0 8px;
+  padding: 6px 8px 6px 4px;
+  transition: border-color 0.15s;
+}
+
+#downloadsListBox > richlistitem:hover {
+  border-color: color-mix(in srgb, var(--wren-dl-accent) 55%, transparent);
+}
+
+.downloadMainArea {
+  background: transparent;
+}
+
+.downloadTypeIcon {
+  box-sizing: content-box;
+  width: 28px;
+  height: 28px;
+  padding: 8px;
+  margin-inline-end: 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--wren-dl-accent) 12%, transparent);
+}
+
+.downloadTarget {
+  color: var(--wren-dl-text);
+  font-size: 1.02em;
+}
+
+.downloadDetails {
+  color: var(--wren-dl-soft);
+  opacity: 1;
+  font-size: 0.86em;
+}
+
+.downloadProgress {
+  height: 6px;
+  margin-inline-end: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wren-dl-accent) 18%, transparent);
+}
+
+.downloadProgress::-moz-progress-bar {
+  border-radius: 999px;
+  background: var(--wren-dl-accent);
+}
+
+.downloadButton {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  border-radius: 50% !important;
+  color: var(--wren-dl-accent);
+  background: color-mix(in srgb, var(--wren-dl-accent) 10%, transparent);
+}
+
+.downloadButton:hover:not(:active) {
+  color: var(--wren-dl-ground);
+  background: var(--wren-dl-accent);
+  border-color: var(--wren-dl-accent);
+}
+
+#emptyDownloads {
+  color: var(--wren-dl-soft);
+  text-align: center;
+}
+
+#downloadsSummary {
+  background: transparent;
+  border-top: none;
+}
+
+#downloadsFooterButtons toolbarseparator {
+  display: none;
+}
+
+#downloadsHistory {
+  margin: 4px 12px 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--wren-dl-accent);
+  background: color-mix(in srgb, var(--wren-dl-accent) 10%, transparent);
+  justify-content: center;
+}
+
+#downloadsHistory:hover {
+  color: var(--wren-dl-ground);
+  background: var(--wren-dl-accent);
+}
+
+#downloadsHistory,
+.downloadDetails {
+  text-transform: lowercase;
+}

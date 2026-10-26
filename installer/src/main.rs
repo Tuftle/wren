@@ -19,16 +19,43 @@ const MAGIC: &[u8; 8] = b"WRENSETP";
 const CREATE_NO_WINDOW: u32 = 0x0800_0000;
 
 // Wren's colours (the dark theme)
-const BG: Color32 = Color32::from_rgb(0x21, 0x1c, 0x17);
-const CARD: Color32 = Color32::from_rgb(0x2a, 0x23, 0x1c);
-const LINE: Color32 = Color32::from_rgb(0x3a, 0x31, 0x28);
-const TEXT: Color32 = Color32::from_rgb(0xe6, 0xdc, 0xcd);
-const SOFT: Color32 = Color32::from_rgb(0x9a, 0x8b, 0x7a);
-const AMBER: Color32 = Color32::from_rgb(0xd9, 0xa0, 0x73);
-const BROWN: Color32 = Color32::from_rgb(0x8a, 0x4b, 0x2a);
-const CREAM: Color32 = Color32::from_rgb(0xf4, 0xef, 0xe6);
-const SHELL: Color32 = Color32::from_rgb(0xf3, 0xe9, 0xd6);
-const GLOW: Color32 = Color32::from_rgb(0xff, 0xc6, 0x6e);
+
+// ---- colours: the same palette as tuftle.vercel.app, dark or cream like the system's setting --------------------------
+
+fn light() -> bool {
+    static LIGHT: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *LIGHT.get_or_init(|| {
+        // `--light` and `--dark` choose by hand, for previews
+        if std::env::args().any(|a| a == "--light") {
+            return true;
+        }
+        if std::env::args().any(|a| a == "--dark") {
+            return false;
+        }
+        Command::new("reg")
+            .args(["query", r"HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "/v", "AppsUseLightTheme"])
+            .creation_flags(CREATE_NO_WINDOW)
+            .output()
+            .map(|o| String::from_utf8_lossy(&o.stdout).trim_end().ends_with("0x1"))
+            .unwrap_or(false)
+    })
+}
+
+fn pick(dark: [u8; 3], light_: [u8; 3]) -> Color32 {
+    let c = if light() { light_ } else { dark };
+    Color32::from_rgb(c[0], c[1], c[2])
+}
+
+fn bg() -> Color32 { pick([0x21, 0x1c, 0x17], [0xf4, 0xef, 0xe6]) }
+fn card() -> Color32 { pick([0x2a, 0x23, 0x1c], [0xfb, 0xf8, 0xf2]) }
+fn line() -> Color32 { pick([0x3a, 0x31, 0x28], [0xdd, 0xd2, 0xc1]) }
+fn text() -> Color32 { pick([0xe6, 0xdc, 0xcd], [0x3b, 0x2f, 0x25]) }
+fn soft() -> Color32 { pick([0x9a, 0x8b, 0x7a], [0x8a, 0x7b, 0x6b]) }
+fn amber() -> Color32 { pick([0xd9, 0xa0, 0x73], [0x8a, 0x4b, 0x2a]) }
+fn brown() -> Color32 { Color32::from_rgb(0x8a, 0x4b, 0x2a) }
+fn cream() -> Color32 { Color32::from_rgb(0xf4, 0xef, 0xe6) }
+fn shell() -> Color32 { Color32::from_rgb(0xf3, 0xe9, 0xd6) }
+fn glow() -> Color32 { Color32::from_rgb(0xff, 0xc6, 0x6e) }
 
 #[derive(Clone, PartialEq)]
 enum Screen {
@@ -384,7 +411,7 @@ fn draw_egg(painter: &egui::Painter, centre: Pos2, size: f32, f: f32, time: f64)
     painter.add(Shape::ellipse_filled(Pos2::new(centre.x, base.y + 6.0), Vec2::new(w * 0.52, 8.0), Color32::from_black_alpha(70)));
     let shake = if f > 0.12 { ((time * 9.0).sin() as f32) * 0.035 * (0.4 + f) } else { 0.0 };
     let pts: Vec<Pos2> = egg_points(centre, w, h, 0.0, std::f32::consts::TAU, 72).into_iter().map(|p| rot(p, base, shake)).collect();
-    painter.add(Shape::convex_polygon(pts.clone(), SHELL, Stroke::new(1.5, Color32::from_rgb(0xc9, 0xb2, 0x8c))));
+    painter.add(Shape::convex_polygon(pts.clone(), shell(), Stroke::new(1.5, Color32::from_rgb(0xc9, 0xb2, 0x8c))));
     // a soft shine on the left, and the speckles
     painter.add(Shape::ellipse_filled(rot(Pos2::new(centre.x - w * 0.18, centre.y - h * 0.22), base, shake), Vec2::new(w * 0.16, h * 0.2), Color32::from_rgb(0xfa, 0xf3, 0xe6)));
     for (dx, dy, r) in [(0.22, -0.2, 3.0), (-0.28, 0.1, 2.5), (0.12, 0.28, 3.5), (-0.1, -0.34, 2.0), (0.3, 0.05, 2.0)] {
@@ -394,7 +421,7 @@ fn draw_egg(painter: &egui::Painter, centre: Pos2, size: f32, f: f32, time: f64)
     let visible = ((f / 0.9).clamp(0.0, 1.0) * CRACKS.len() as f32).floor() as usize;
     if visible >= 2 {
         let line: Vec<Pos2> = CRACKS[..visible.min(CRACKS.len())].iter().map(|(u, v)| rot(Pos2::new(centre.x + w * u, centre.y + h * v), base, shake)).collect();
-        painter.add(Shape::line(line.clone(), Stroke::new(7.0, GLOW.gamma_multiply(0.35))));
+        painter.add(Shape::line(line.clone(), Stroke::new(7.0, glow().gamma_multiply(0.35))));
         painter.add(Shape::line(line, Stroke::new(2.2, Color32::from_rgb(0x8a, 0x5a, 0x36))));
     }
 }
@@ -408,17 +435,17 @@ fn draw_wren(painter: &egui::Painter, origin: Pos2, scale: f32, hop: f32) {
     }
     // tail
     painter.add(Shape::CubicBezier(CubicBezierShape::from_points_stroke(
-        [at(80.0, 68.0), at(100.0, 64.0), at(104.0, 46.0), at(96.0, 30.0)], false, Color32::TRANSPARENT, Stroke::new(10.0 * scale, BROWN),
+        [at(80.0, 68.0), at(100.0, 64.0), at(104.0, 46.0), at(96.0, 30.0)], false, Color32::TRANSPARENT, Stroke::new(10.0 * scale, brown()),
     )));
-    painter.add(Shape::circle_filled(at(96.0, 31.0), 5.0 * scale, BROWN));
+    painter.add(Shape::circle_filled(at(96.0, 31.0), 5.0 * scale, brown()));
     // body, head, beak
-    painter.add(Shape::ellipse_filled(at(62.0, 74.0), Vec2::new(28.0 * scale, 21.0 * scale), BROWN));
-    painter.add(Shape::circle_filled(at(42.0, 57.0), 14.0 * scale, BROWN));
-    painter.add(Shape::convex_polygon(vec![at(30.0, 54.0), at(14.0, 52.0), at(29.0, 61.0)], BROWN, Stroke::NONE));
+    painter.add(Shape::ellipse_filled(at(62.0, 74.0), Vec2::new(28.0 * scale, 21.0 * scale), brown()));
+    painter.add(Shape::circle_filled(at(42.0, 57.0), 14.0 * scale, brown()));
+    painter.add(Shape::convex_polygon(vec![at(30.0, 54.0), at(14.0, 52.0), at(29.0, 61.0)], brown(), Stroke::NONE));
     // the front
-    painter.add(Shape::ellipse_filled(at(64.0, 77.0), Vec2::new(15.0 * scale, 8.0 * scale), AMBER));
+    painter.add(Shape::ellipse_filled(at(64.0, 77.0), Vec2::new(15.0 * scale, 8.0 * scale), Color32::from_rgb(0xe0, 0xa8, 0x70)));
     // the eye
-    painter.add(Shape::circle_filled(at(38.0, 54.0), 2.8 * scale, CREAM));
+    painter.add(Shape::circle_filled(at(38.0, 54.0), 2.8 * scale, cream()));
     painter.add(Shape::circle_filled(at(38.6, 54.4), 1.5 * scale, Color32::from_rgb(0x2a, 0x12, 0x06)));
 }
 
@@ -432,7 +459,7 @@ fn draw_shell_halves(painter: &egui::Painter, centre: Pos2, size: f32) {
     let (right, left) = (low[0], *low.last().unwrap());
     low.extend(zigzag(left, right, 8, 7.0));
     let low_centre = Pos2::new(centre.x, centre.y + h * 0.28);
-    fan(painter, low_centre, &low, SHELL, Stroke::new(1.5, Color32::from_rgb(0xc9, 0xb2, 0x8c)));
+    fan(painter, low_centre, &low, shell(), Stroke::new(1.5, Color32::from_rgb(0xc9, 0xb2, 0x8c)));
     // the top half, lifted and tipped to one side
     let mut top = egg_points(centre, w, h, -t_c, t_c, 40);
     let (a, b) = (top[0], *top.last().unwrap());
@@ -440,16 +467,16 @@ fn draw_shell_halves(painter: &egui::Painter, centre: Pos2, size: f32) {
     let pivot = Pos2::new(centre.x - w * 0.5, centre.y - h * 0.05);
     let moved: Vec<Pos2> = top.iter().map(|p| rot(*p, pivot, -0.55) + Vec2::new(-w * 0.55, -h * 0.12)).collect();
     let top_centre = rot(Pos2::new(centre.x, centre.y - h * 0.28), pivot, -0.55) + Vec2::new(-w * 0.55, -h * 0.12);
-    fan(painter, top_centre, &moved, SHELL, Stroke::new(1.5, Color32::from_rgb(0xc9, 0xb2, 0x8c)));
+    fan(painter, top_centre, &moved, shell(), Stroke::new(1.5, Color32::from_rgb(0xc9, 0xb2, 0x8c)));
 }
 
 fn button(ui: &mut egui::Ui, rect: Rect, label: &str, primary: bool) -> bool {
     let response = ui.allocate_rect(rect, Sense::click());
     let hover = response.hovered();
     let (fill, text, stroke) = if primary {
-        (if hover { Color32::from_rgb(0xe6, 0xb5, 0x8a) } else { AMBER }, BG, Stroke::NONE)
+        (if hover { pick([0xe6, 0xb5, 0x8a], [0x9c, 0x58, 0x33]) } else { amber() }, bg(), Stroke::NONE)
     } else {
-        (if hover { Color32::from_rgb(0x34, 0x2b, 0x22) } else { Color32::TRANSPARENT }, TEXT, Stroke::new(1.0, if hover { AMBER } else { LINE }))
+        (if hover { card() } else { Color32::TRANSPARENT }, text(), Stroke::new(1.0, if hover { amber() } else { line() }))
     };
     let radius = (rect.height() / 2.0) as u8;
     ui.painter().add(Shape::rect_filled(rect, CornerRadius::same(radius), fill));
@@ -472,10 +499,13 @@ impl App {
             fonts.families.get_mut(&FontFamily::Proportional).unwrap().insert(0, "georgia".into());
         }
         cc.egui_ctx.set_fonts(fonts);
-        let mut visuals = egui::Visuals::dark();
-        visuals.selection.bg_fill = AMBER;
-        visuals.widgets.hovered.bg_stroke = Stroke::new(1.0, AMBER);
-        visuals.override_text_color = Some(TEXT);
+        let mut visuals = if light() { egui::Visuals::light() } else { egui::Visuals::dark() };
+        visuals.widgets.inactive.bg_fill = card();
+        visuals.widgets.inactive.weak_bg_fill = card();
+        visuals.widgets.inactive.bg_stroke = Stroke::new(1.0, line());
+        visuals.selection.bg_fill = amber();
+        visuals.widgets.hovered.bg_stroke = Stroke::new(1.0, amber());
+        visuals.override_text_color = Some(text());
         cc.egui_ctx.set_visuals(visuals);
         let mut screen = if std::env::args().any(|a| a == "--uninstall") { Screen::Confirm } else { Screen::Welcome };
         let mut preview = 0.0;
@@ -585,8 +615,8 @@ impl eframe::App for App {
         egui::CentralPanel::default().frame(egui::Frame::NONE).show(ctx, |ui| {
             let full = ui.max_rect();
             let painter = ui.painter().clone();
-            painter.add(Shape::rect_filled(full, CornerRadius::same(18), BG));
-            painter.add(Shape::rect_stroke(full.shrink(0.5), CornerRadius::same(18), Stroke::new(1.0, LINE), egui::StrokeKind::Inside));
+            painter.add(Shape::rect_filled(full, CornerRadius::same(18), bg()));
+            painter.add(Shape::rect_stroke(full.shrink(0.5), CornerRadius::same(18), Stroke::new(1.0, line()), egui::StrokeKind::Inside));
             // a warm glow at the top, like the browser's own pages
             {
                 let mut mesh = Mesh::default();
@@ -612,28 +642,28 @@ impl eframe::App for App {
             if self.screen != Screen::Installing && self.screen != Screen::Removing {
                 let cross = Rect::from_center_size(Pos2::new(full.right() - 30.0, full.top() + 28.0), Vec2::splat(32.0));
                 let r = ui.allocate_rect(cross, Sense::click());
-                painter.text(cross.center(), Align2::CENTER_CENTER, "\u{00d7}", FontId::proportional(26.0), if r.hovered() { TEXT } else { SOFT });
+                painter.text(cross.center(), Align2::CENTER_CENTER, "\u{00d7}", FontId::proportional(26.0), if r.hovered() { text() } else { soft() });
                 if r.clicked() {
                     ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                 }
             }
-            painter.text(Pos2::new(full.left() + 26.0, full.top() + 28.0), Align2::LEFT_CENTER, "wren", FontId::proportional(18.0), SOFT);
+            painter.text(Pos2::new(full.left() + 26.0, full.top() + 28.0), Align2::LEFT_CENTER, "wren", FontId::proportional(18.0), soft());
 
             let cx = full.center().x;
             match self.screen.clone() {
                 Screen::Welcome => {
                     draw_wren(&painter, Pos2::new(cx, full.top() + 168.0), 1.15, 0.0);
-                    painter.text(Pos2::new(cx, full.top() + 206.0), Align2::CENTER_TOP, "welcome to wren", FontId::proportional(34.0), TEXT);
-                    painter.text(Pos2::new(cx, full.top() + 256.0), Align2::CENTER_TOP, "a quiet, warm place to browse.", FontId::proportional(17.0), SOFT);
-                    painter.text(Pos2::new(cx, full.top() + 282.0), Align2::CENTER_TOP, "nothing is sent home, and nothing follows you around.", FontId::proportional(17.0), SOFT);
+                    painter.text(Pos2::new(cx, full.top() + 206.0), Align2::CENTER_TOP, "welcome to wren", FontId::proportional(34.0), text());
+                    painter.text(Pos2::new(cx, full.top() + 256.0), Align2::CENTER_TOP, "a quiet, warm place to browse.", FontId::proportional(17.0), soft());
+                    painter.text(Pos2::new(cx, full.top() + 282.0), Align2::CENTER_TOP, "nothing is sent home, and nothing follows you around.", FontId::proportional(17.0), soft());
                     let check = Rect::from_min_size(Pos2::new(cx - 130.0, full.top() + 332.0), Vec2::new(300.0, 24.0));
-                    ui.put(check, egui::Checkbox::new(&mut self.desktop_shortcut, egui::RichText::new("add a shortcut on the desktop").size(16.0).color(TEXT)));
+                    ui.put(check, egui::Checkbox::new(&mut self.desktop_shortcut, egui::RichText::new("add a shortcut on the desktop").size(16.0).color(text())));
                     painter.text(
                         Pos2::new(cx, full.bottom() - 34.0),
                         Align2::CENTER_CENTER,
                         "installs just for you, in your own folder. no administrator needed.",
                         FontId::proportional(14.0),
-                        SOFT,
+                        soft(),
                     );
                     if button(ui, Rect::from_center_size(Pos2::new(cx, full.top() + 388.0), Vec2::new(210.0, 46.0)), "install wren", true) {
                         self.start(ctx);
@@ -642,20 +672,20 @@ impl eframe::App for App {
                 Screen::Installing => {
                     let f = self.shown.clamp(0.0, 1.0);
                     draw_egg(&painter, Pos2::new(cx, full.top() + 190.0), 190.0, f, time);
-                    painter.text(Pos2::new(cx, full.top() + 322.0), Align2::CENTER_TOP, "settling in\u{2026}", FontId::proportional(26.0), TEXT);
+                    painter.text(Pos2::new(cx, full.top() + 322.0), Align2::CENTER_TOP, "settling in\u{2026}", FontId::proportional(26.0), text());
                     painter.text(
                         Pos2::new(cx, full.top() + 360.0),
                         Align2::CENTER_TOP,
                         format!("{}%   a few moments, then it is yours.", (f * 100.0).round() as u32),
                         FontId::proportional(16.0),
-                        SOFT,
+                        soft(),
                     );
                     // a thin bar under the text
                     let track = Rect::from_center_size(Pos2::new(cx, full.top() + 410.0), Vec2::new(300.0, 6.0));
-                    painter.add(Shape::rect_filled(track, CornerRadius::same(3), LINE));
+                    painter.add(Shape::rect_filled(track, CornerRadius::same(3), line()));
                     let mut filled = track;
                     filled.set_width(track.width() * f);
-                    painter.add(Shape::rect_filled(filled, CornerRadius::same(3), AMBER));
+                    painter.add(Shape::rect_filled(filled, CornerRadius::same(3), amber()));
                 }
                 Screen::Done => {
                     let since = (time - self.done_at) as f32;
@@ -664,13 +694,13 @@ impl eframe::App for App {
                     draw_shell_halves(&painter, Pos2::new(cx + 6.0, full.top() + 222.0), 150.0);
                     draw_wren(&painter, Pos2::new(cx + 6.0, full.top() + 262.0 - 8.0 * (1.0 - rise)), 1.35 * (0.5 + 0.5 * rise), hop);
                     let a = (255.0 * rise) as u8;
-                    painter.text(Pos2::new(cx, full.top() + 306.0), Align2::CENTER_TOP, "wren is ready", FontId::proportional(32.0), Color32::from_rgba_unmultiplied(TEXT.r(), TEXT.g(), TEXT.b(), a));
+                    painter.text(Pos2::new(cx, full.top() + 306.0), Align2::CENTER_TOP, "wren is ready", FontId::proportional(32.0), Color32::from_rgba_unmultiplied(text().r(), text().g(), text().b(), a));
                     painter.text(
                         Pos2::new(cx, full.top() + 350.0),
                         Align2::CENTER_TOP,
                         "everything is in place. hello, small thing.",
                         FontId::proportional(16.0),
-                        Color32::from_rgba_unmultiplied(SOFT.r(), SOFT.g(), SOFT.b(), a),
+                        Color32::from_rgba_unmultiplied(soft().r(), soft().g(), soft().b(), a),
                     );
                     if button(ui, Rect::from_center_size(Pos2::new(cx - 75.0, full.top() + 408.0), Vec2::new(138.0, 42.0)), "open wren", true) {
                         let _ = Command::new(self.install_dir.join("wren.exe")).spawn();
@@ -682,41 +712,41 @@ impl eframe::App for App {
                 }
                 Screen::Confirm => {
                     draw_wren(&painter, Pos2::new(cx, full.top() + 160.0), 1.15, 0.0);
-                    painter.text(Pos2::new(cx, full.top() + 198.0), Align2::CENTER_TOP, "remove wren?", FontId::proportional(34.0), TEXT);
-                    painter.text(Pos2::new(cx, full.top() + 250.0), Align2::CENTER_TOP, "wren and its add-ons will be taken off this computer.", FontId::proportional(17.0), SOFT);
-                    painter.text(Pos2::new(cx, full.top() + 276.0), Align2::CENTER_TOP, "your bookmarks, history and settings stay, unless you tick the box.", FontId::proportional(17.0), SOFT);
+                    painter.text(Pos2::new(cx, full.top() + 198.0), Align2::CENTER_TOP, "remove wren?", FontId::proportional(34.0), text());
+                    painter.text(Pos2::new(cx, full.top() + 250.0), Align2::CENTER_TOP, "wren and its add-ons will be taken off this computer.", FontId::proportional(17.0), soft());
+                    painter.text(Pos2::new(cx, full.top() + 276.0), Align2::CENTER_TOP, "your bookmarks, history and settings stay, unless you tick the box.", FontId::proportional(17.0), soft());
                     let check = Rect::from_min_size(Pos2::new(cx - 190.0, full.top() + 326.0), Vec2::new(400.0, 24.0));
-                    ui.put(check, egui::Checkbox::new(&mut self.delete_data, egui::RichText::new("also delete my bookmarks, history and settings").size(16.0).color(TEXT)));
+                    ui.put(check, egui::Checkbox::new(&mut self.delete_data, egui::RichText::new("also delete my bookmarks, history and settings").size(16.0).color(text())));
                     if button(ui, Rect::from_center_size(Pos2::new(cx - 100.0, full.top() + 392.0), Vec2::new(180.0, 46.0)), "keep wren", true) {
                         ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                     }
                     if button(ui, Rect::from_center_size(Pos2::new(cx + 100.0, full.top() + 392.0), Vec2::new(180.0, 46.0)), "remove wren", false) {
                         self.start_removal(ctx);
                     }
-                    painter.text(Pos2::new(cx, full.bottom() - 28.0), Align2::CENTER_CENTER, "if wren is open, it will be closed.", FontId::proportional(14.0), SOFT);
+                    painter.text(Pos2::new(cx, full.bottom() - 28.0), Align2::CENTER_CENTER, "if wren is open, it will be closed.", FontId::proportional(14.0), soft());
                 }
                 Screen::Removing => {
                     let f = self.shown.clamp(0.0, 1.0);
                     // the cracks close up as wren is packed away
                     draw_egg(&painter, Pos2::new(cx, full.top() + 190.0), 190.0, 1.0 - f, time);
-                    painter.text(Pos2::new(cx, full.top() + 322.0), Align2::CENTER_TOP, "packing up\u{2026}", FontId::proportional(26.0), TEXT);
-                    painter.text(Pos2::new(cx, full.top() + 360.0), Align2::CENTER_TOP, format!("{}%", (f * 100.0).round() as u32), FontId::proportional(16.0), SOFT);
+                    painter.text(Pos2::new(cx, full.top() + 322.0), Align2::CENTER_TOP, "packing up\u{2026}", FontId::proportional(26.0), text());
+                    painter.text(Pos2::new(cx, full.top() + 360.0), Align2::CENTER_TOP, format!("{}%", (f * 100.0).round() as u32), FontId::proportional(16.0), soft());
                     let track = Rect::from_center_size(Pos2::new(cx, full.top() + 410.0), Vec2::new(300.0, 6.0));
-                    painter.add(Shape::rect_filled(track, CornerRadius::same(3), LINE));
+                    painter.add(Shape::rect_filled(track, CornerRadius::same(3), line()));
                     let mut filled = track;
                     filled.set_width(track.width() * f);
-                    painter.add(Shape::rect_filled(filled, CornerRadius::same(3), AMBER));
+                    painter.add(Shape::rect_filled(filled, CornerRadius::same(3), amber()));
                 }
                 Screen::Removed(kept) => {
                     draw_egg(&painter, Pos2::new(cx, full.top() + 178.0), 170.0, 0.0, 0.0);
-                    painter.text(Pos2::new(cx, full.top() + 292.0), Align2::CENTER_TOP, "wren is removed", FontId::proportional(32.0), TEXT);
+                    painter.text(Pos2::new(cx, full.top() + 292.0), Align2::CENTER_TOP, "wren is removed", FontId::proportional(32.0), text());
                     let line = if kept {
                         "your bookmarks and settings are still on this computer."
                     } else {
                         "everything of yours was deleted too."
                     };
-                    painter.text(Pos2::new(cx, full.top() + 338.0), Align2::CENTER_TOP, line, FontId::proportional(16.0), SOFT);
-                    painter.text(Pos2::new(cx, full.top() + 364.0), Align2::CENTER_TOP, "come back whenever you like.", FontId::proportional(16.0), SOFT);
+                    painter.text(Pos2::new(cx, full.top() + 338.0), Align2::CENTER_TOP, line, FontId::proportional(16.0), soft());
+                    painter.text(Pos2::new(cx, full.top() + 364.0), Align2::CENTER_TOP, "come back whenever you like.", FontId::proportional(16.0), soft());
                     if button(ui, Rect::from_center_size(Pos2::new(cx, full.top() + 414.0), Vec2::new(170.0, 42.0)), "close", true) {
                         forget_myself();
                         ctx.send_viewport_cmd(egui::ViewportCommand::Close);
@@ -724,17 +754,17 @@ impl eframe::App for App {
                 }
                 Screen::Failed(message) => {
                     draw_wren(&painter, Pos2::new(cx, full.top() + 160.0), 1.1, 0.0);
-                    painter.text(Pos2::new(cx, full.top() + 200.0), Align2::CENTER_TOP, "that didn't work", FontId::proportional(30.0), TEXT);
-                    painter.text(Pos2::new(cx, full.top() + 248.0), Align2::CENTER_TOP, message, FontId::proportional(15.0), SOFT);
-                    painter.text(Pos2::new(cx, full.top() + 300.0), Align2::CENTER_TOP, "nothing was changed on your computer that you need to undo.", FontId::proportional(15.0), SOFT);
-                    painter.text(Pos2::new(cx, full.top() + 324.0), Align2::CENTER_TOP, "you can try again, or write to tuftle@proton.me.", FontId::proportional(15.0), SOFT);
+                    painter.text(Pos2::new(cx, full.top() + 200.0), Align2::CENTER_TOP, "that didn't work", FontId::proportional(30.0), text());
+                    painter.text(Pos2::new(cx, full.top() + 248.0), Align2::CENTER_TOP, message, FontId::proportional(15.0), soft());
+                    painter.text(Pos2::new(cx, full.top() + 300.0), Align2::CENTER_TOP, "nothing was changed on your computer that you need to undo.", FontId::proportional(15.0), soft());
+                    painter.text(Pos2::new(cx, full.top() + 324.0), Align2::CENTER_TOP, "you can try again, or write to tuftle@proton.me.", FontId::proportional(15.0), soft());
                     if button(ui, Rect::from_center_size(Pos2::new(cx, full.top() + 392.0), Vec2::new(160.0, 42.0)), "close", true) {
                         ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                     }
                 }
             }
         });
-        let _ = (lerp_color(BG, CARD, 0.0), self.started_at);
+        let _ = (lerp_color(bg(), card(), 0.0), self.started_at);
     }
 }
 
