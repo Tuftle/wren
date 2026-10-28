@@ -5,6 +5,7 @@
   --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
   --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light dark;
+  accent-color: var(--link);
 }
 @media (prefers-color-scheme: dark) {
   :root {
