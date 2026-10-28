@@ -73,13 +73,23 @@
     "shortcuts": {
       "suggested_key": { "default": "Alt+Shift+H" },
       "description": "Show the shortcut cheat sheet"
+    },
+    "vault": {
+      "suggested_key": { "default": "Alt+Shift+V" },
+      "description": "Open burrow, your passwords"
+    },
+    "vault-fill": {
+      "suggested_key": { "default": "Alt+Shift+L" },
+      "description": "Fill this page's login from burrow"
     }
   },
+
+  "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';",
 
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["lib/common.js", "content/page.js", "content/extras.js"],
+      "js": ["lib/common.js", "content/page.js", "content/extras.js", "content/vault.js"],
       "run_at": "document_idle",
       "all_frames": false
     },
@@ -124,6 +134,7 @@
       "background/profile.js",
       "background/importer.js",
       "background/reports.js",
+      "background/vault.js",
       "background/updates.js",
       "background/startup.js"
     ]

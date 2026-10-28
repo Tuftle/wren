@@ -20,6 +20,9 @@ const say = text => { document.getElementById("msg").textContent = text; };
 const ACTIONS = [
   ["focus mode", "hide the bars, quiet notifications", async () => { const { on } = await send({ type: "focusState" }); await send({ type: "focus", on: !on }); }],
   ["panic: forget everything and close", "", () => browser.wren.panic()],
+  ["open burrow", "your passwords", () => open("burrow/index.html")],
+  ["fill this page's login from burrow", "needs burrow unlocked", async () => browser.tabs.sendMessage((await page()).id, { type: "vault:fillNow" })],
+  ["lock burrow", "forget the open logins", () => send({ type: "vault:lock" })],
   ["open privacy report", "", () => open("privacy.html")],
   ["open wren pages (notes, sheet, draw)", "", () => open("pages.html")],
   ["open daily digest", "", () => open("digest.html")],
